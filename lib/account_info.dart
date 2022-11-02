@@ -43,13 +43,7 @@ class Account_info extends StatelessWidget {
                         // decorationThickness: 5, //decoration 'underline' thickness
                       ),
                     ),
-                    Image(
-                        image: NetworkImage(
-                            'https://img.icons8.com/material/344/home--v5.png'),
-                        height: 40.0,
-                        width: 30.0,
-
-                    ),
+                    IconButton(onPressed: () {}, icon: Icon(Icons.home))
                     // TextButton.icon(onPressed:() {
                     //   Navigator.pop(context);
                     // }, icon: Icon(Icons.home), label: Text('Home'))
