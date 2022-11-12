@@ -4,164 +4,297 @@ void main() {
   runApp(Home());
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color.fromRGBO(241, 237, 236, 20.0),
-        body: Column(
-          children: <Widget>[
-            Container(
-                height: 75.0,
-                padding: EdgeInsets.all(15.0),
-                child: Container(
-                    child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.menu_rounded)),
-                    // Image.network(
-                    //     'https://img.icons8.com/ios-filled/344/squared-menu.png'),
+  State<Home> createState() => _MyAppState();
+}
 
-                    Text(
-                      "Home",
-                      style: TextStyle(
-                        fontSize: 20,
-                        height: 2,
-                        //line height 200%, 1= 100%, were 0.9 = 90% of actual line height
-                        color: Colors.black,
-                        //font color
-                        letterSpacing: 4,
-                        //letter spacing
-                        fontWeight: FontWeight.bold,
-                        // decorationThickness: 5, //decoration 'underline' thickness
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.filter_alt_sharp)),
-                    // Image.network(
-                    //   'https://img.icons8.com/ios-filled/344/empty-filter.png',
-                    //   alignment: Alignment.centerRight,
-                    // )
-                  ],
-                ))),
-            Container(
+// This widget is the root of your application.
+class _MyAppState extends State<Home> {
+  bool _heart_filled = true;
+
+  Padding cards() {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Container(
+        width: 150,
+        height: 250,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Color(0x8B57636C), width: 2),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+              child: Image.asset(
+                'Images/sneakers2.jpg',
+                width: 120,
+                height: 100,
+                fit: BoxFit.contain,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 8, 2),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
-                    height: 250.0,
-                    width: 150.0,
-                    // color: Colors.white,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.black26),
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(15.0),
-                          width: 150.0,
-                          height: 120.0,
-                          child: Image.asset('Images/sneakers2.jpg'),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Text('NIKE',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Text('Snekers for Men',
-                              style: TextStyle(fontSize: 14)),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 10.0),
-                          child: Text(r"$129.99",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 4.0),
-                                child: TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'Buy Now',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(Colors.red),
-                                  ),
-                                  onHover: (value) => ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                          Colors.white),
-                                      foregroundColor:
-                                          MaterialStatePropertyAll(Colors.red)),
-                                ),
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    IconButton.styleFrom(
-                                        foregroundColor:
-                                            Color.fromRGBO(255, 0, 0, 100.0));
-                                  },
-                                  icon: Icon(Icons.favorite_border)),
-                            ],
-                          ),
-                        )
-                      ],
+                  Text(
+                    'NIKE',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Container(
-                    height: 250.0,
-                    width: 150.0,
-                    color: Colors.white,
-                  )
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Sneakers for Men',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      color: Colors.black,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(5, 10, 10, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    r'$129.99',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text(
+                    r'$149.99',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      color: Colors.black,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Buy Now',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.red),
+                        ),
+                        onHover: (value) => ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.white),
+                            foregroundColor:
+                                MaterialStatePropertyAll(Colors.red)),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _heart_filled
+                              ? _heart_filled = false
+                              : _heart_filled = true;
+                          print(_heart_filled);
+                        });
+                        print(_heart_filled);
+                      },
+                      icon: Icon(
+                        _heart_filled
+                            ? Icons.favorite_border_outlined
+                            : Icons.favorite,
+                        color: Colors.deepOrange,
+                      ),
+                    ),
+                  ],
+                )),
           ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.red,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Cart',
-            ),
-          ],
-          // backgroundColor: Colors.red,
         ),
       ),
     );
+  }
+
+  // final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Expanded offers(String title) {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, top: 20.0),
+            child: Text(
+              title,
+              style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0, top: 20.0),
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                'See All',
+                style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white70,
+        actions: <Widget>[
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.home, color: Colors.black),
+                  tooltip: 'Show Snackbar',
+                  mouseCursor: MouseCursor.uncontrolled,
+                  onPressed: () {},
+                ),
+                Text(
+                  'HOME',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 19.0),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.filter_alt_sharp, color: Colors.black),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+              offers("Weekly Deal's"),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [cards(), cards(), cards(), cards()],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+                width: double.infinity,
+              ),
+              offers("Best Seller's"),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [cards(), cards(), cards(), cards()],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+                width: double.infinity,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [cards(), cards(), cards(), cards()],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+                width: double.infinity,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [cards(), cards(), cards(), cards()],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
+        ],
+        backgroundColor: Colors.red,
+      ),
+    ));
   }
 }
