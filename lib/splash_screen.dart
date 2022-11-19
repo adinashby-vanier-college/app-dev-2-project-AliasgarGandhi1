@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mtl_chassures/main.dart';
+import 'package:mtl_chassures/home.dart';
 
 
 void main() {
@@ -19,12 +19,15 @@ class InitState extends State<SplashScreen> {
     startTimer();
   }
   startTimer() async{
-    var duration=Duration(seconds: 3);
+    var duration= Duration(seconds: 3);
     return new Timer(duration, loginRoute());
   }
   loginRoute(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()
-    )
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Home()
+      ),
     );
   }
 
