@@ -1,39 +1,34 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mtl_chassures/home.dart';
+// import 'package:mtl_chassures/home.dart';
+import 'package:mtl_chassures/main.dart';
 
-
-void main() {
-  runApp( const SplashScreen());
-}
-class SplashScreen extends StatefulWidget{
-  const SplashScreen({Key? key}) : super(key: key);
+ void main() {
+   runApp( SplashScreen());
+ }
+ class SplashScreen extends StatelessWidget
+ {
+   Widget build (BuildContext context){
+   return MaterialApp(home: SplashScreenShow(),);
+   }
+ }
+ class SplashScreenShow extends StatefulWidget{
+  const SplashScreenShow({Key? key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() => InitState(); }
+  InitState createState() => InitState(); }
 
-class InitState extends State<SplashScreen> {
+class InitState extends State<SplashScreenShow> {
 
   void initState(){
     super.initState();
-    startTimer();
-  }
-  startTimer() async{
-    var duration= Duration(seconds: 3);
-    return new Timer(duration, loginRoute());
-  }
-  loginRoute(){
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Home()
-      ),
+    Timer(
+      Duration(seconds: 3),
+        () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
         home:Scaffold(
       body: Stack(
@@ -57,10 +52,7 @@ class InitState extends State<SplashScreen> {
       )
     )
     );
-
   }
-
-
 }
 
 

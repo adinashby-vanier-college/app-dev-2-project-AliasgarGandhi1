@@ -68,11 +68,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _MyAppState extends State<LoginScreen> {
-  bool _obscureText=true;
+  bool _obscureTextcreate=true;
+  bool _obscureTextconfirm=true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+          resizeToAvoidBottomInset: false,
           //   appBar: AppBar(
           //     centerTitle: true,
           //     title: Text(
@@ -191,12 +193,12 @@ class _MyAppState extends State<LoginScreen> {
                               suffixIcon: GestureDetector(onTap: (){
                                 setState(()
                                 {
-                                  _obscureText = !_obscureText;
+                                  _obscureTextcreate = !_obscureTextcreate;
                                 }
                                 );
                               },
                                 child:
-                                Icon(_obscureText ? MyFlutterApp.eye :MyFlutterApp.eye_slash,color: Colors.deepOrange),
+                                Icon(_obscureTextcreate ? MyFlutterApp.eye :MyFlutterApp.eye_slash,color: Colors.deepOrange),
                               ),
                               hintText: 'Enter Password',
                               prefixIcon: Icon(MyFlutterApp.key,color: Colors.deepOrange),
@@ -210,7 +212,7 @@ class _MyAppState extends State<LoginScreen> {
                             // onSaved: (value){
                             //   _password =value;
                             // },
-                            obscureText: _obscureText,
+                            obscureText: _obscureTextcreate,
                             onChanged: (String value){
 
                             },
@@ -233,12 +235,12 @@ class _MyAppState extends State<LoginScreen> {
                               suffixIcon: GestureDetector(onTap: (){
                                 setState(()
                                 {
-                                  _obscureText = !_obscureText;
+                                  _obscureTextconfirm = !_obscureTextconfirm;
                                 }
                                 );
                               },
                                 child:
-                                Icon(_obscureText ? MyFlutterApp.eye :MyFlutterApp.eye_slash,color: Colors.deepOrange),
+                                Icon(_obscureTextconfirm ? MyFlutterApp.eye :MyFlutterApp.eye_slash,color: Colors.deepOrange),
                               ),
                               hintText: 'ReType Password',
                               prefixIcon: Icon(MyFlutterApp.key,color: Colors.deepOrange),
@@ -252,7 +254,7 @@ class _MyAppState extends State<LoginScreen> {
                             // onSaved: (value){
                             //   _password =value;
                             // },
-                            obscureText: _obscureText,
+                            obscureText: _obscureTextconfirm,
                             onChanged: (String value){
 
                             },
