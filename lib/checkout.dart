@@ -72,7 +72,7 @@ class Checkout extends StatelessWidget {
                   
                   Container(
 padding: EdgeInsets.only(left: 15,right: 15),
-                    height: 200.0,////.0,
+                    height: 400.0,////.0,
                     width: 350.0,
                     // color: Colors.white,
                     decoration: BoxDecoration(
@@ -83,20 +83,24 @@ padding: EdgeInsets.only(left: 15,right: 15),
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 12,),
+                        SizedBox(height: 16,),
                         Row(
+
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
 
-                              width: 80.0,
-                              height: 80.0,
+                              width: 90.0,
+                              height: 100.0,
                               decoration: BoxDecoration(
                               color:Colors.grey[400],
                                 borderRadius: BorderRadius.circular(20),),
                               child: Center(
+
                                 child: Container(
+
                                   width: 70.0,
-                                  height: 70.0,
+                                  height: 90.0,
                                   padding: EdgeInsets.all(1.0),
                                   decoration: BoxDecoration(
 
@@ -121,16 +125,56 @@ padding: EdgeInsets.only(left: 15,right: 15),
                                     children: [
                                       Container(width:100.0,child: Text("Nike Air Max",style: TextStyle(
                                         fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
                                       ),
+
                                       ),
+
 
 
                                       Spacer(),
 
-                                      Text("\$120.00",style: TextStyle(fontWeight: FontWeight.bold
+                                      Text("\$120.00",style: TextStyle(fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
                                       ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 8,),
+                                  Row(
+                                    children: [
+                                      Container(width:100.0,child: Text("Cross Training Weightlifting Shoe",style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                      ),
+                                      ),
+
+                                      ),
+
+
+
+                                      Spacer(),
+
+
+                                    ],
+                                  ),
+                                  SizedBox(height: 8,),
+                                  Row(
+                                    children: [
+                                      Container(width:100.0,child: Text("Size: M 8.5/W 10",style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 13,
+                                      ),
+                                      ),
+
+                                      ),
+
+
+
+                                      Spacer(),
+
+
                                     ],
                                   ),
                                   SizedBox(height: 8,),
@@ -179,6 +223,8 @@ padding: EdgeInsets.only(left: 15,right: 15),
                                           icon: Icon(MyFlutterApp.trash_alt,color: Colors.black87,)),
                                     ],
                                   ),
+                                  SizedBox(height: 21,),
+
 
 
                                 ],
@@ -186,43 +232,108 @@ padding: EdgeInsets.only(left: 15,right: 15),
                             )
                           ],
                         ),
+                        SizedBox(height: 30,),
+                        Divider(color: Colors.black45,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:<Widget> [
+                            Text(
+                                "Total",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )
+                            ),
+                            Text(
+                                "\$23.00",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )
+                            ),
 
-                        Container(
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:<Widget> [
+                            Text(
+                                "Delivery charges",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                )
+                            ),
+                            Text(
+                                "\$10.00",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                )
+                            ),
 
-                          width: 350,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 4.0),
-                                // child: TextButton(
-                                //   onPressed: () {},
-                                //   child: Text(
-                                //     'Buy Now',
-                                //     style: TextStyle(color: Colors.white),
-                                //   ),
-                                //   style: ButtonStyle(
-                                //     backgroundColor:
-                                //     MaterialStatePropertyAll(Colors.red),
-                                //   ),
-                                //   onHover: (value) => ButtonStyle(
-                                //       backgroundColor: MaterialStatePropertyAll(
-                                //           Colors.white),
-                                //       foregroundColor:
-                                //       MaterialStatePropertyAll(Colors.red)),
-                                // ),
-                              ),
+                          ],
+                        ),
+                        SizedBox(height: 4,),
+                        Divider(color: Colors.black,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:<Widget> [
+                            Text(
+                                "Sub Total",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19,
+                                )
+                            ),
+                            Text(
+                                "\$23.00",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19,
+                                )
+                            ),
 
-                            ],
-                          ),
-                        )
+                          ],
+                        ),
+
+                        // Container(
+                        //
+                        //   width: 350,
+                        //   height: 30,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.end,
+                        //     crossAxisAlignment: CrossAxisAlignment.end,
+                        //     children: [
+                        //       Container(
+                        //         margin: EdgeInsets.symmetric(
+                        //             horizontal: 15.0, vertical: 4.0),
+                        //         // child: TextButton(
+                        //         //   onPressed: () {},
+                        //         //   child: Text(
+                        //         //     'Buy Now',
+                        //         //     style: TextStyle(color: Colors.white),
+                        //         //   ),
+                        //         //   style: ButtonStyle(
+                        //         //     backgroundColor:
+                        //         //     MaterialStatePropertyAll(Colors.red),
+                        //         //   ),
+                        //         //   onHover: (value) => ButtonStyle(
+                        //         //       backgroundColor: MaterialStatePropertyAll(
+                        //         //           Colors.white),
+                        //         //       foregroundColor:
+                        //         //       MaterialStatePropertyAll(Colors.red)),
+                        //         // ),
+                        //       ),
+                        //
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
-                  SizedBox(height:200,),
+                  SizedBox(height:50,),
                   Material(
 
                     color: Colors.red,
