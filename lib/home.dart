@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-// void main() {
-//   runApp(Home());
-// }
+void main() {
+  runApp(Home());
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
-
   _HomeState createState() => _HomeState();
 }
 

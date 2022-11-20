@@ -4,9 +4,9 @@ import 'my_flutter_app_icons.dart';
 import 'package:flutter/widgets.dart';
 
 
-void main() {
-  runApp( const LoginScreen());
-}
+// void main() {
+//   runApp( const LoginScreen());
+// }
 
 class CustomWidgets {
 
@@ -168,16 +168,12 @@ class _MyAppState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 40,),
-
                 Material(
                   color: Colors.deepOrange,
-
                   borderRadius: BorderRadius.circular(50),
                   child: InkWell(
-
                     onTap: () {},
                     borderRadius: BorderRadius.circular(50),
-
                     child: Container(
 
                       width: 200,
@@ -231,13 +227,11 @@ class _MyAppState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
               ],
             ),
             )
             ),
           ],
-
             ),
       )
     );

@@ -41,10 +41,8 @@ class Checkout extends StatelessWidget {
 
                         Text(
                           "Checkout",
-
                           style: TextStyle(
                             fontSize: 22,
-
                             height: 2,
                             //line height 200%, 1= 100%, were 0.9 = 90% of actual line height
                             color: Colors.black,
@@ -52,8 +50,6 @@ class Checkout extends StatelessWidget {
                             letterSpacing: 2,
                             //letter spacing
                             fontWeight: FontWeight.bold,
-
-
                             // decorationThickness: 5, //decoration 'underline' thickness
                           ),
                         ),
