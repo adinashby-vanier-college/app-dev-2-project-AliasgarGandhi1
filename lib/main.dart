@@ -10,7 +10,6 @@ import 'package:flutter/widgets.dart';
 
 class CustomWidgets {
 
-
     static Widget socialButtonRect(title, color, icon, {Function? onTap}) {
     return InkWell(
       onTap: () {

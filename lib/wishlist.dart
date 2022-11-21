@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/checkout.dart';
+import 'package:mtl_chassures/home.dart';
+
+import 'my_flutter_app_icons.dart';
 
 const List<int> list = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-void main() {
-  runApp(Wishlist());
-}
+// void main() => runApp(Wishlist());
 
 class Wishlist extends StatelessWidget {
   const Wishlist({Key? key}) : super(key: key);
@@ -14,45 +16,60 @@ class Wishlist extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Color.fromRGBO(241, 237, 236, 20.0),
-            body: SafeArea(
-              child: Column(children: [
-                Container(
-                  padding: EdgeInsets.all(13.0),
+            appBar: AppBar(
+              backgroundColor: Colors.white70,
+              iconTheme: IconThemeData(size: 30),
+              actions: <Widget>[
+                Expanded(
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.arrow_back_outlined)),
-                      Text(
-                        "Wishlist",
-                        style: TextStyle(
-                          fontSize: 20,
-                          height: 2,
-                          //line height 200%, 1= 100%, were 0.9 = 90% of actual line height
-                          color: Colors.black,
-                          //font color
-                          letterSpacing: 4,
-                          //letter spacing
-                          fontWeight: FontWeight.bold,
-                          // decorationThickness: 5, //decoration 'underline' thickness
-                        ),
+                        icon: Icon(MyFlutterApp.arrow_left, color: Colors.black),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.home))
+                      Text(
+                        'WISHLIST',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 19.0),
+                      ),
+                      IconButton(
+                        icon: Icon(MyFlutterApp.home, color: Colors.black),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Home(),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
-                Container(
+              ],
+            ),
+            body: SafeArea(
+              child: Column(children: [
+
+                Card(
                   color: Colors.white,
-                  margin: EdgeInsets.only(top: 30.0),
-                  height: 150.0,
-                  width: 350.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                  // height: 150.0,
+                  // width: 350.0,
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.delete_rounded)),
+                          onPressed: () {}, icon: Icon(MyFlutterApp.trash_alt)),
                       Image.asset(
                         'Images/sneakers1.webp',
+                        //Wishlist['image']
                         height: 150.0,
                         width: 100.0,
                       ),
@@ -86,7 +103,14 @@ class Wishlist extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10.0, vertical: 10.0),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Checkout(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 'Buy Now',
                                 style: TextStyle(color: Colors.white),
@@ -106,33 +130,38 @@ class Wishlist extends StatelessWidget {
                           )
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 15.0, bottom: 26.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            DropdownButtonExample(),
-                            Container(
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Add to Cart',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: ButtonStyle(
-                                  padding: MaterialStatePropertyAll(
-                                      EdgeInsets.all(10.0)),
-                                  backgroundColor:
-                                      MaterialStatePropertyAll(Colors.red),
-                                ),
-                                onHover: (value) => ButtonStyle(
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0, top: 35.0),
+                        child: Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              DropdownButtonExample(),
+                              Container(
+                                child: TextButton(
+                                  onPressed: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) => (),
+                                    //   ),
+                                    // );
+                                  },
+                                  child: Text(
+                                    'Add to Cart',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: ButtonStyle(
+                                    padding: MaterialStatePropertyAll(
+                                        EdgeInsets.all(10.0)),
                                     backgroundColor:
-                                        MaterialStatePropertyAll(Colors.white),
-                                    foregroundColor:
-                                        MaterialStatePropertyAll(Colors.red)),
-                              ),
-                            )
-                          ],
+                                        MaterialStatePropertyAll(Colors.red),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -157,7 +186,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
   Widget build(BuildContext context) {
     return DropdownButton<int>(
       value: dropdownValue,
-      icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+      icon: const Icon(MyFlutterApp.arrow_circle_down),
       elevation: 16,
       style: const TextStyle(color: Colors.black),
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
