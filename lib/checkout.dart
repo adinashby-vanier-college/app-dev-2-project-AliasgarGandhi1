@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 
 
 
-void main() {
-
-  runApp(Checkout());
-}
+// void main() {
+//
+//   runApp(Checkout());
+// }
 
 class Checkout extends StatelessWidget {
   const Checkout({super.key});

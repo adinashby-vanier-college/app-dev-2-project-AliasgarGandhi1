@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/home.dart';
 // import 'package:mtl_chassures/home.dart';
 import 'package:mtl_chassures/main.dart';
 
@@ -23,7 +24,7 @@ class InitState extends State<SplashScreenShow> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-        () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => LoginScreen()))
+        () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Home()))
     );
   }
 
