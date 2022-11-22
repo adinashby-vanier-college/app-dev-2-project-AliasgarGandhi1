@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'my_flutter_app_icons.dart';
 
 
-void main() {
-  runApp( const LoginScreen());
-}
+// void main() {
+//   runApp( const LoginScreen());
+// }
 
 class CustomWidgets {
 
@@ -60,14 +60,14 @@ class CustomWidgets {
     );
   }
 }
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _MyAppState();
+  State<Register> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<LoginScreen> {
+class _MyAppState extends State<Register> {
   bool _obscureTextcreate=true;
   bool _obscureTextconfirm=true;
   @override

@@ -81,7 +81,7 @@ class _MyAppState extends State<LoginScreen> {
       //     backgroundColor: Colors.deepOrange,
       //   ),
         backgroundColor: Colors.white,
-
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
