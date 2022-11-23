@@ -34,8 +34,8 @@ class _MyAppState extends State<Home> {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: 100,
-        height: 250,
+        width: 150,
+        // height: 250,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -58,7 +58,7 @@ class _MyAppState extends State<Home> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
               child: Image.asset(
-                'Images/'+product['img'],
+                'Images/' + product['img'],
                 //Shoes['image']
                 width: 120,
                 height: 100,
@@ -107,7 +107,7 @@ class _MyAppState extends State<Home> {
                 children: [
                   Text(
                     // r'$129.99',
-                    "\$ "+product['price'],
+                    "\$ " + product['price'],
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 14,
@@ -148,11 +148,7 @@ class _MyAppState extends State<Home> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.red),
                         ),
-                        onHover: (value) => ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.white),
-                            foregroundColor:
-                                MaterialStatePropertyAll(Colors.red)),
+
                       ),
                     ),
                     IconButton(
@@ -181,7 +177,7 @@ class _MyAppState extends State<Home> {
   }
 
   // final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool showBorder = false;
+  // bool showBorder = false;
 
   Container offers(String title) {
     return Container(
@@ -316,24 +312,66 @@ class _MyAppState extends State<Home> {
         ),
       ),
       body: SafeArea(
-          // child: GestureDetector(
-          //   onTap: () => FocusScope.of(context).unfocus(),
-          //   child: ListView(
-          //     padding: EdgeInsets.zero,
-          //     shrinkWrap: true,
-          //     scrollDirection: Axis.vertical,
-          //     children: [
-          //       offers("Weekly Deal's"),
-          //       Container(
+        // child: GestureDetector(
+        //   onTap: () => FocusScope.of(context).unfocus(),
+        //   child: ListView(
+        //     padding: EdgeInsets.zero,
+        //     shrinkWrap: true,
+        //     scrollDirection: Axis.vertical,
+        //     children: [
+        //       offers("Weekly Deal's"),
+        //       Container(
 
-            child: FirebaseAnimatedList(
-              query: dbRef,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
-                Map product = snapshot.value as Map;
-                product['key'] = snapshot.key;
-                return listItem(product: product);
-              },
+        // child: SingleChildScrollView(
+
+          child: Column(
+          children: [
+            Flexible(
+              child: FirebaseAnimatedList(
+                query: dbRef,
+                // controller: ScrollController(initialScrollOffset: ),
+                scrollDirection: Axis.horizontal,
+
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  Map product = snapshot.value as Map;
+                  product['key'] = snapshot.key;
+                  return listItem(product: product);
+                },
+              ),
             ),
+            Flexible(
+              child: FirebaseAnimatedList(
+                query: dbRef,
+                // controller: ScrollController(initialScrollOffset: ),
+                scrollDirection: Axis.horizontal,
+
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  Map product = snapshot.value as Map;
+                  product['key'] = snapshot.key;
+                  return listItem(product: product);
+                },
+              ),
+            ),
+            Flexible(
+              child: FirebaseAnimatedList(
+                query: dbRef,
+                // controller: ScrollController(initialScrollOffset: ),
+                scrollDirection: Axis.horizontal,
+
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  Map product = snapshot.value as Map;
+                  product['key'] = snapshot.key;
+                  return listItem(product: product);
+                },
+              ),
+            ),
+          ],
+        ),
+        // ),
+      ),
       //     child: TextButton(
       //   onPressed: () {
       //     Navigator.push(
@@ -345,48 +383,48 @@ class _MyAppState extends State<Home> {
       //   },
       //   child: Text('Insert Data'),
       // )
-          // ),
-          // SingleChildScrollView(
-          //   scrollDirection: Axis.horizontal,
-          //   child: Row(
-          //     children: [cards(), cards(), cards(), cards()],
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: 10.0,
-          //   width: double.infinity,
-          // ),
-          // offers("Best Seller's"),
-          // SingleChildScrollView(
-          //   scrollDirection: Axis.horizontal,
-          //   child: Row(
-          //     children: [cards(), cards(), cards(), cards()],
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: 10.0,
-          //   width: double.infinity,
-          // ),
-          // SingleChildScrollView(
-          //   scrollDirection: Axis.horizontal,
-          //   child: Row(
-          //     children: [cards(), cards(), cards(), cards()],
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: 10.0,
-          //   width: double.infinity,
-          // ),
-          // SingleChildScrollView(
-          //   scrollDirection: Axis.horizontal,
-          //   child: Row(
-          //     children: [cards(), cards(), cards(), cards()],
-          //   ),
-          // )
-          // ],
-          // ),
-          // ),
-          ),
+      // ),
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      //   child: Row(
+      //     children: [cards(), cards(), cards(), cards()],
+      //   ),
+      // ),
+      // SizedBox(
+      //   height: 10.0,
+      //   width: double.infinity,
+      // ),
+      // offers("Best Seller's"),
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      //   child: Row(
+      //     children: [cards(), cards(), cards(), cards()],
+      //   ),
+      // ),
+      // SizedBox(
+      //   height: 10.0,
+      //   width: double.infinity,
+      // ),
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      //   child: Row(
+      //     children: [cards(), cards(), cards(), cards()],
+      //   ),
+      // ),
+      // SizedBox(
+      //   height: 10.0,
+      //   width: double.infinity,
+      // ),
+      // SingleChildScrollView(
+      //   scrollDirection: Axis.horizontal,
+      //   child: Row(
+      //     children: [cards(), cards(), cards(), cards()],
+      //   ),
+      // )
+      // ],
+      // ),
+      // ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.red,
