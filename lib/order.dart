@@ -27,14 +27,84 @@ class Order extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
                 child: GestureDetector(
                   onTap: () {},
-                  child: Icon(Icons.monitor_heart, color: Colors.redAccent),
+                  child: Icon(Icons.filter_alt, color: Colors.black),
                 ),
               ),
             ],
           ),
-          //body: orderTile(),
+          body: SingleChildScrollView(
+            child: Container(
+            padding: EdgeInsets.all(20),
+            alignment: Alignment.topCenter,
+            child:Column(
+              children: <Widget>[
+                OrderCard(),
+                SizedBox(height: 10,),
+                OrderCard(),
+                SizedBox(height: 10,),
+                OrderCard(),
+                SizedBox(height: 10,),
+                OrderCard(),
+                SizedBox(height: 10,),
+                OrderCard(),
+                SizedBox(height: 10,),
+                OrderCard(),
+                SizedBox(height: 10,),
+                OrderCard(),
+              ],
+            )
+            ),
+          ),
         ),
       ),
     );
+  }
+
+  Widget OrderCard() {
+    return Card(
+
+      elevation: 50,
+      shadowColor: Colors.black,
+      color: Colors.white,
+      child: SizedBox(
+        width: 350,
+        height: 150,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                child: Image.asset('Images/sneakers2.jpg',fit: BoxFit.fill),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1)),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
+                child: RichText(
+                  text: TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(text: 'Order#: ',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                      TextSpan(text: '123456',style: TextStyle(color: Colors.black)),
+
+                      TextSpan(text: '\nOrder Date: ',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                      TextSpan(text: '30/09/2022',style: TextStyle(color: Colors.black)),
+
+                      TextSpan(text: '\nStatus',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                      TextSpan(text: 'Shipped',style: TextStyle(color: Colors.black)),
+
+                      TextSpan(text: '\nDelivered Date: ',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                      TextSpan(text: '08/10/2022',style: TextStyle(color: Colors.black)),
+
+                    ],
+                  ),
+                ),
+              )
+
+            ],
+          ), //Column
+        ), //Padding
+      ), //SizedBox
+    );//Card
   }
 }
