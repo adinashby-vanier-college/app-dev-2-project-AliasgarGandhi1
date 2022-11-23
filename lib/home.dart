@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
+import 'package:mtl_chassures/insertProduct.dart';
 import 'package:mtl_chassures/main.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
@@ -23,40 +24,41 @@ class Home extends StatefulWidget {
 class _MyAppState extends State<Home> {
   bool _heart_filled = true;
 
-  Query dbRef = FirebaseDatabase.instance.ref().child('Product');
-  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Product');
+  Query dbRef = FirebaseDatabase.instance.ref().child('Products');
+  DatabaseReference reference =
+      FirebaseDatabase.instance.ref().child('Products');
 
   Widget listItem({required Map product}) {
-  // Padding cards() {
-  //   return Padding
+    // Padding cards() {
+    //   return Padding
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
-        width: 150,
+        width: 100,
         height: 250,
-        // decoration: BoxDecoration(
-        //   color: Colors.white,
-        //   boxShadow: [
-        //     BoxShadow(
-        //       color: Colors.black12,
-        //       offset: const Offset(
-        //         5.0,
-        //         5.0,
-        //       ),
-        //       blurRadius: 10.0,
-        //       spreadRadius: 2.0,
-        //     ),
-        //   ],
-        //   borderRadius: BorderRadius.circular(15),
-        //   border: Border.all(color: Color(0x8B57636C), width: 2),
-        // ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Color(0x8B57636C), width: 2),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
               child: Image.asset(
-                'Images/sneakers2.jpg',
+                'Images/'+product['img'],
                 //Shoes['image']
                 width: 120,
                 height: 100,
@@ -87,7 +89,7 @@ class _MyAppState extends State<Home> {
                 children: [
                   Text(
                     // 'Sneakers for Men',
-                    product['type'],
+                    product['category'],
                     style: TextStyle(
                       fontFamily: 'Inter',
                       color: Colors.black,
@@ -105,7 +107,7 @@ class _MyAppState extends State<Home> {
                 children: [
                   Text(
                     // r'$129.99',
-                    product['price'],
+                    "\$ "+product['price'],
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 14,
@@ -314,66 +316,77 @@ class _MyAppState extends State<Home> {
         ),
       ),
       body: SafeArea(
-        // child: GestureDetector(
-        //   onTap: () => FocusScope.of(context).unfocus(),
-        //   child: ListView(
-        //     padding: EdgeInsets.zero,
-        //     shrinkWrap: true,
-        //     scrollDirection: Axis.vertical,
-        //     children: [
-        //       offers("Weekly Deal's"),
-        //       Container(
-                  child: FirebaseAnimatedList(
-                    query: dbRef,
-                    itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
-                      Map product = snapshot.value as Map;
-                      product['key'] = snapshot.key;
-                      print('hello');
-                      return listItem(product: product);
-                    },
-                  ),
-              // ),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     children: [cards(), cards(), cards(), cards()],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 10.0,
-              //   width: double.infinity,
-              // ),
-              // offers("Best Seller's"),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     children: [cards(), cards(), cards(), cards()],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 10.0,
-              //   width: double.infinity,
-              // ),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     children: [cards(), cards(), cards(), cards()],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 10.0,
-              //   width: double.infinity,
-              // ),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     children: [cards(), cards(), cards(), cards()],
-              //   ),
-              // )
-            // ],
+          // child: GestureDetector(
+          //   onTap: () => FocusScope.of(context).unfocus(),
+          //   child: ListView(
+          //     padding: EdgeInsets.zero,
+          //     shrinkWrap: true,
+          //     scrollDirection: Axis.vertical,
+          //     children: [
+          //       offers("Weekly Deal's"),
+          //       Container(
+
+            child: FirebaseAnimatedList(
+              query: dbRef,
+              itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+                Map product = snapshot.value as Map;
+                product['key'] = snapshot.key;
+                return listItem(product: product);
+              },
+            ),
+      //     child: TextButton(
+      //   onPressed: () {
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => InsertData(),
+      //       ),
+      //     );
+      //   },
+      //   child: Text('Insert Data'),
+      // )
           // ),
-        // ),
-      ),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [cards(), cards(), cards(), cards()],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          //   width: double.infinity,
+          // ),
+          // offers("Best Seller's"),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [cards(), cards(), cards(), cards()],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          //   width: double.infinity,
+          // ),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [cards(), cards(), cards(), cards()],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          //   width: double.infinity,
+          // ),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [cards(), cards(), cards(), cards()],
+          //   ),
+          // )
+          // ],
+          // ),
+          // ),
+          ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.red,
