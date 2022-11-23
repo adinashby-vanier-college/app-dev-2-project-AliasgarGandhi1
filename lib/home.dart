@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/main.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'package:mtl_chassures/checkout.dart';
+import 'package:mtl_chassures/order.dart';
 import 'package:mtl_chassures/search.dart';
 import 'package:mtl_chassures/appBar.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -21,32 +23,33 @@ class Home extends StatefulWidget {
 class _MyAppState extends State<Home> {
   bool _heart_filled = true;
 
-  // Query dbRef = FirebaseDatabase.instance.ref().child('Shoes');
-  // DatabaseReference reference = FirebaseDatabase.instance.ref().child('Shoes');
+  Query dbRef = FirebaseDatabase.instance.ref().child('Product');
+  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Product');
 
-  // Widget listItem({required Map student}) {
-  Padding cards() {
+  Widget listItem({required Map product}) {
+  // Padding cards() {
+  //   return Padding
     return Padding(
       padding: EdgeInsets.all(10),
       child: Container(
         width: 150,
         height: 250,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
-            ),
-          ],
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Color(0x8B57636C), width: 2),
-        ),
+        // decoration: BoxDecoration(
+        //   color: Colors.white,
+        //   boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.black12,
+        //       offset: const Offset(
+        //         5.0,
+        //         5.0,
+        //       ),
+        //       blurRadius: 10.0,
+        //       spreadRadius: 2.0,
+        //     ),
+        //   ],
+        //   borderRadius: BorderRadius.circular(15),
+        //   border: Border.all(color: Color(0x8B57636C), width: 2),
+        // ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -66,8 +69,8 @@ class _MyAppState extends State<Home> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'NIKE',
-                    // shoes['brand']
+                    // 'NIKE',
+                    product['brand'],
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 14,
@@ -83,8 +86,8 @@ class _MyAppState extends State<Home> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'Sneakers for Men',
-                    // shoes['type'] && shoes['gender']
+                    // 'Sneakers for Men',
+                    product['type'],
                     style: TextStyle(
                       fontFamily: 'Inter',
                       color: Colors.black,
@@ -101,8 +104,8 @@ class _MyAppState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    r'$129.99',
-                    // shoes['price']
+                    // r'$129.99',
+                    product['price'],
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 14,
@@ -178,8 +181,8 @@ class _MyAppState extends State<Home> {
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   bool showBorder = false;
 
-  Expanded offers(String title) {
-    return Expanded(
+  Container offers(String title) {
+    return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -257,7 +260,12 @@ class _MyAppState extends State<Home> {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Order(),
+                  ),
+                );
               },
             ),
             ListTile(
@@ -306,54 +314,65 @@ class _MyAppState extends State<Home> {
         ),
       ),
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: [
-              offers("Weekly Deal's"),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [cards(), cards(), cards(), cards()],
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-                width: double.infinity,
-              ),
-              offers("Best Seller's"),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [cards(), cards(), cards(), cards()],
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-                width: double.infinity,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [cards(), cards(), cards(), cards()],
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-                width: double.infinity,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [cards(), cards(), cards(), cards()],
-                ),
-              )
-            ],
-          ),
-        ),
+        // child: GestureDetector(
+        //   onTap: () => FocusScope.of(context).unfocus(),
+        //   child: ListView(
+        //     padding: EdgeInsets.zero,
+        //     shrinkWrap: true,
+        //     scrollDirection: Axis.vertical,
+        //     children: [
+        //       offers("Weekly Deal's"),
+        //       Container(
+                  child: FirebaseAnimatedList(
+                    query: dbRef,
+                    itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+                      Map product = snapshot.value as Map;
+                      product['key'] = snapshot.key;
+                      print('hello');
+                      return listItem(product: product);
+                    },
+                  ),
+              // ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [cards(), cards(), cards(), cards()],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10.0,
+              //   width: double.infinity,
+              // ),
+              // offers("Best Seller's"),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [cards(), cards(), cards(), cards()],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10.0,
+              //   width: double.infinity,
+              // ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [cards(), cards(), cards(), cards()],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10.0,
+              //   width: double.infinity,
+              // ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [cards(), cards(), cards(), cards()],
+              //   ),
+              // )
+            // ],
+          // ),
+        // ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

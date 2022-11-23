@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/home.dart';
 // import 'package:mtl_chassures/home.dart';
 import 'package:mtl_chassures/main.dart';
 
- void main() {
+ void main() async{
+   WidgetsFlutterBinding.ensureInitialized();
+   Firebase.initializeApp();
    runApp( SplashScreen());
  }
  class SplashScreen extends StatelessWidget

@@ -35,7 +35,9 @@ class Checkout extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: Icon(MyFlutterApp.arrow_left)),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }, icon: Icon(MyFlutterApp.arrow_left)),
                         // Image.network(
                         //     'https://img.icons8.com/ios-filled/344/squared-menu.png'),
 
