@@ -39,7 +39,36 @@ class _Account_info extends State<Account_info> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromRGBO(241, 237, 236, 20.0),
-        appBar: appBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.white70,
+          iconTheme: IconThemeData(size: 30),
+          actions: <Widget>[
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                  ),
+                  Text(
+                    'Account',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 19.0),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.favorite_border, color: Colors.black),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         body: SafeArea(
             child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,

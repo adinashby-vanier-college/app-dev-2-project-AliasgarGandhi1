@@ -35,7 +35,7 @@ class _MyAppState extends State<Home> {
       padding: EdgeInsets.all(10),
       child: Container(
         width: 150,
-        // height: 250,
+        height: 250,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -53,9 +53,9 @@ class _MyAppState extends State<Home> {
           border: Border.all(color: Color(0x8B57636C), width: 2),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          // mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
+            Container(
               padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
               child: Image.asset(
                 'Images/' + product['img'],
@@ -65,10 +65,10 @@ class _MyAppState extends State<Home> {
                 fit: BoxFit.contain,
               ),
             ),
-            Padding(
+            Container(
               padding: EdgeInsetsDirectional.fromSTEB(10, 0, 8, 2),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
+                // mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
                     // 'NIKE',
@@ -82,10 +82,10 @@ class _MyAppState extends State<Home> {
                 ],
               ),
             ),
-            Padding(
+            Container(
               padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
+                // mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
                     // 'Sneakers for Men',
@@ -99,10 +99,10 @@ class _MyAppState extends State<Home> {
                 ],
               ),
             ),
-            Padding(
+            Container(
               padding: EdgeInsetsDirectional.fromSTEB(5, 10, 10, 0),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
+                // mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
@@ -126,10 +126,10 @@ class _MyAppState extends State<Home> {
                 ],
               ),
             ),
-            Padding(
+            Container(
                 padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
                 child: Row(
-                  mainAxisSize: MainAxisSize.max,
+                  // mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
@@ -148,7 +148,6 @@ class _MyAppState extends State<Home> {
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.red),
                         ),
-
                       ),
                     ),
                     IconButton(
@@ -157,9 +156,7 @@ class _MyAppState extends State<Home> {
                           _heart_filled
                               ? _heart_filled = false
                               : _heart_filled = true;
-                          print(_heart_filled);
                         });
-                        print(_heart_filled);
                       },
                       icon: Icon(
                         _heart_filled
@@ -216,7 +213,39 @@ class _MyAppState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      appBar: appBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white70,
+        iconTheme: IconThemeData(size: 30),
+        actions: <Widget>[
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 40,
+                  width: 40,
+                ),
+                Text(
+                  'HOME',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 19.0),
+                ),
+                IconButton(
+                  icon: Icon(Icons.favorite_border, color: Colors.black),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Wishlist()));
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -312,119 +341,65 @@ class _MyAppState extends State<Home> {
         ),
       ),
       body: SafeArea(
-        // child: GestureDetector(
-        //   onTap: () => FocusScope.of(context).unfocus(),
-        //   child: ListView(
-        //     padding: EdgeInsets.zero,
-        //     shrinkWrap: true,
-        //     scrollDirection: Axis.vertical,
-        //     children: [
-        //       offers("Weekly Deal's"),
-        //       Container(
-
-        // child: SingleChildScrollView(
-
+        child: SingleChildScrollView(
           child: Column(
-          children: [
-            Flexible(
-              child: FirebaseAnimatedList(
-                query: dbRef,
-                // controller: ScrollController(initialScrollOffset: ),
-                scrollDirection: Axis.horizontal,
-
-                itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation<double> animation, int index) {
-                  Map product = snapshot.value as Map;
-                  product['key'] = snapshot.key;
-                  return listItem(product: product);
-                },
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                height: 60,
+                child: offers("Weekly Deal's"),
               ),
-            ),
-            Flexible(
-              child: FirebaseAnimatedList(
-                query: dbRef,
-                // controller: ScrollController(initialScrollOffset: ),
-                scrollDirection: Axis.horizontal,
-
-                itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation<double> animation, int index) {
-                  Map product = snapshot.value as Map;
-                  product['key'] = snapshot.key;
-                  return listItem(product: product);
-                },
+              SizedBox(
+                height: 280,
+                child: Expanded(
+                  child: FirebaseAnimatedList(
+                    query: dbRef,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                        Animation<double> animation, int index) {
+                      Map product = snapshot.value as Map;
+                      product['key'] = snapshot.key;
+                      return listItem(product: product);
+                    },
+                  ),
+                ),
               ),
-            ),
-            Flexible(
-              child: FirebaseAnimatedList(
-                query: dbRef,
-                // controller: ScrollController(initialScrollOffset: ),
-                scrollDirection: Axis.horizontal,
+              SizedBox(
+                height: 280,
+                child: Expanded(
+                  child: FirebaseAnimatedList(
+                    query: dbRef,
+                    // controller: ScrollController(initialScrollOffset: ),
+                    scrollDirection: Axis.horizontal,
 
-                itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation<double> animation, int index) {
-                  Map product = snapshot.value as Map;
-                  product['key'] = snapshot.key;
-                  return listItem(product: product);
-                },
+                    itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                        Animation<double> animation, int index) {
+                      Map product = snapshot.value as Map;
+                      product['key'] = snapshot.key;
+                      return listItem(product: product);
+                    },
+                  ),
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 280,
+                child: Expanded(
+                  child: FirebaseAnimatedList(
+                    query: dbRef,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                        Animation<double> animation, int index) {
+                      Map product = snapshot.value as Map;
+                      product['key'] = snapshot.key;
+                      return listItem(product: product);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        // ),
       ),
-      //     child: TextButton(
-      //   onPressed: () {
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //         builder: (context) => InsertData(),
-      //       ),
-      //     );
-      //   },
-      //   child: Text('Insert Data'),
-      // )
-      // ),
-      // SingleChildScrollView(
-      //   scrollDirection: Axis.horizontal,
-      //   child: Row(
-      //     children: [cards(), cards(), cards(), cards()],
-      //   ),
-      // ),
-      // SizedBox(
-      //   height: 10.0,
-      //   width: double.infinity,
-      // ),
-      // offers("Best Seller's"),
-      // SingleChildScrollView(
-      //   scrollDirection: Axis.horizontal,
-      //   child: Row(
-      //     children: [cards(), cards(), cards(), cards()],
-      //   ),
-      // ),
-      // SizedBox(
-      //   height: 10.0,
-      //   width: double.infinity,
-      // ),
-      // SingleChildScrollView(
-      //   scrollDirection: Axis.horizontal,
-      //   child: Row(
-      //     children: [cards(), cards(), cards(), cards()],
-      //   ),
-      // ),
-      // SizedBox(
-      //   height: 10.0,
-      //   width: double.infinity,
-      // ),
-      // SingleChildScrollView(
-      //   scrollDirection: Axis.horizontal,
-      //   child: Row(
-      //     children: [cards(), cards(), cards(), cards()],
-      //   ),
-      // )
-      // ],
-      // ),
-      // ),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.red,

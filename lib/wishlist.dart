@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/cart.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/home.dart';
 
@@ -26,7 +27,7 @@ class Wishlist extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: Icon(MyFlutterApp.arrow_left, color: Colors.black),
+                        icon: Icon(Icons.arrow_back, color: Colors.black),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -40,7 +41,7 @@ class Wishlist extends StatelessWidget {
                             fontSize: 19.0),
                       ),
                       IconButton(
-                        icon: Icon(MyFlutterApp.home, color: Colors.black),
+                        icon: Icon(Icons.home, color: Colors.black),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -66,7 +67,7 @@ class Wishlist extends StatelessWidget {
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {}, icon: Icon(MyFlutterApp.trash_alt)),
+                          onPressed: () {}, icon: Icon(Icons.delete_rounded)),
                       Image.asset(
                         'Images/sneakers1.webp',
                         //Wishlist['image']
@@ -141,12 +142,12 @@ class Wishlist extends StatelessWidget {
                               Container(
                                 child: TextButton(
                                   onPressed: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => (),
-                                    //   ),
-                                    // );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Cart(),
+                                      ),
+                                    );
                                   },
                                   child: Text(
                                     'Add to Cart',
@@ -186,7 +187,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
   Widget build(BuildContext context) {
     return DropdownButton<int>(
       value: dropdownValue,
-      icon: const Icon(MyFlutterApp.arrow_circle_down),
+      icon: const Icon(Icons.arrow_drop_down_circle_rounded),
       elevation: 16,
       style: const TextStyle(color: Colors.black),
       borderRadius: BorderRadius.all(Radius.circular(10.0)),

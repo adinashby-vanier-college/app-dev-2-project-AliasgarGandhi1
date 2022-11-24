@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/home.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:flutter/services.dart';
 
@@ -56,7 +57,15 @@ class Checkout extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {}, icon: Icon(MyFlutterApp.home)),
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Home(),
+                              //   ),
+                              // );
+                              Navigator.pop(context);
+                            }, icon: Icon(MyFlutterApp.home)),
                         // Image.network(
                         //   'https://img.icons8.com/ios-filled/344/empty-filter.png',
                         //   alignment: Alignment.centerRight,
