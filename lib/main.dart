@@ -1,10 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/splash_screen.dart';
 
-import 'checkout.dart';
 
-void main(){
+
+void main() async{
+
   runApp(const MyApp());
 }
 

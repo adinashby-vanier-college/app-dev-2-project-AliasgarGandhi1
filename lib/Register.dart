@@ -1,13 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/login.dart';
 import 'my_flutter_app_icons.dart';
 
 
-void main() {
-  runApp( const Register());
-}
+
+
+// void main() {
+//
+//   runApp(const Register());
+// }
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -19,19 +26,28 @@ class Register extends StatefulWidget {
 class _MyAppState extends State<Register> {
   bool _obscureTextcreate=true;
   bool _obscureTextconfirm=true;
+  late String _name="",_email="",_phone="";
+  TextEditingController _password=TextEditingController();
+  TextEditingController _confirmPassword=TextEditingController();
+
+  final GlobalKey<FormState> _formkey= GlobalKey<FormState>();
+
+
+  RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
+  //A function that validate user entered password
+  bool validatePassword(String pass) {
+    String _password = pass.trim();
+    if (pass_valid.hasMatch(_password)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
           resizeToAvoidBottomInset: false,
-          //   appBar: AppBar(
-          //     centerTitle: true,
-          //     title: Text(
-          //       "Login"
-          //     ),
-          //
-          //     backgroundColor: Colors.deepOrange,
-          //   ),
           backgroundColor: Colors.white,
 
           body: Column(
@@ -39,7 +55,7 @@ class _MyAppState extends State<Register> {
             crossAxisAlignment: CrossAxisAlignment.center,
 
             children: [
-              SizedBox(height: 120.0,),
+              SizedBox(height: 70.0,),
               Text("Register",
                 style: TextStyle(
                     fontSize: 35,
@@ -48,11 +64,17 @@ class _MyAppState extends State<Register> {
                 ),
               ),
               Padding(padding: const EdgeInsets.symmetric(vertical: 30),
-                  child :  Form(child: Column(
+                child: SingleChildScrollView(
+
+                  child :  Form(
+
+                    key: _formkey,
+                      child: Column(
                     children: [
                       Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                         child : TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+                            //controller: _name,
+                            keyboardType: TextInputType.name,
                             decoration: InputDecoration(
                               labelText: 'Full Name',
                               labelStyle: TextStyle(
@@ -64,21 +86,22 @@ class _MyAppState extends State<Register> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(color: Colors.deepOrange,width: 3),
                               ),
-
-
                             ),
+                            onSaved: (value){
+                           //   _name = value as TextEditingController;
+                            },
                             onChanged: (String value){
 
                             },
                             validator: (value){
-                              return value!.isEmpty ? 'please enter full name' : null;
-
+                              return value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value) ? 'Please enter or correct name' : null;
                             }
                         ),
                       ),
                       SizedBox(height: 20,),
                       Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                         child : TextFormField(
+                        //    controller: _email,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               labelText: 'Email Address',
@@ -94,11 +117,14 @@ class _MyAppState extends State<Register> {
 
 
                             ),
+                            onSaved: (value){
+
+                            },
                             onChanged: (String value){
 
                             },
                             validator: (value){
-                              return value!.isEmpty ? 'please enter email' : null;
+                              return value!.isEmpty || !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value) ? 'please enter email' : null;
 
                             }
                         ),
@@ -106,7 +132,10 @@ class _MyAppState extends State<Register> {
                       SizedBox(height: 20,),
                       Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                         child : TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+
+                         keyboardType: TextInputType.number,
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                            //keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               labelText: 'Phone Number',
                               labelStyle: TextStyle(
@@ -121,18 +150,35 @@ class _MyAppState extends State<Register> {
 
 
                             ),
+                            onSaved: (value){
+
+                            },
                             onChanged: (String value){
 
                             },
-                            validator: (value){
-                              return value!.isEmpty ? 'please enter phone number' : null;
+                            validator: (value) {
+                              //    return value!.isEmpty || !RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$').hasMatch(value) ? 'please enter phone number' : null;
 
+
+                              if (value!.isEmpty) {
+                                return 'Please enter Phone Number';
+                              }
+                              if (value.length !=10) {
+                                return 'Your phone number must have 10 digits!!';
+                              }
+                              if (!RegExp(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$').hasMatch(value)) {
+                                return 'Your phone number is invalid!!';
+                              }
+                              //
+                              return null;
                             }
                         ),
                       ),
                       SizedBox(height: 20,),
                       Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                         child : TextFormField(
+
+
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
                               labelText: ' Create Password',
@@ -150,6 +196,7 @@ class _MyAppState extends State<Register> {
                                 Icon(_obscureTextcreate ? MyFlutterApp.eye :MyFlutterApp.eye_slash,color: Colors.deepOrange),
                               ),
                               hintText: 'Enter Password',
+
                               prefixIcon: Icon(MyFlutterApp.key,color: Colors.deepOrange),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -158,16 +205,35 @@ class _MyAppState extends State<Register> {
 
 
                             ),
-                            // onSaved: (value){
-                            //   _password =value;
-                            // },
+                             onSaved: (value){
+
+                             },
                             obscureText: _obscureTextcreate,
                             onChanged: (String value){
 
                             },
                             validator: (value){
-                              return value!.isEmpty ? 'please enter password' : null;
-
+                              if(value!.isEmpty)
+                              {
+                                return 'Please a Enter Password';
+                              }
+                              if(value.length<=7){
+                                return 'Your password must be at least 8 characters';
+                              }
+                              if(value.length>=15){
+                                return 'Your password must be only 15 characters long';
+                              }
+                              // else{
+                              //   //call function to check password
+                              //  // bool result = validatePassword(value);
+                              //  //  if(result){
+                              //  //    // create account event
+                              //  //    return null;
+                              //  //  }else{
+                              //  //    return " Password should contain Capital, small letter & Number & Special";
+                              //  //  }
+                              // }
+return null;
                             }
                         ),
                       ),
@@ -175,6 +241,7 @@ class _MyAppState extends State<Register> {
 
                       Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                         child : TextFormField(
+
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
                               labelText: ' Confirm Password',
@@ -200,29 +267,27 @@ class _MyAppState extends State<Register> {
 
 
                             ),
-                            // onSaved: (value){
-                            //   _password =value;
-                            // },
+                            onSaved: (value){
+
+                             },
                             obscureText: _obscureTextconfirm,
                             onChanged: (String value){
 
                             },
                             validator: (value){
-                              return value!.isEmpty ? 'please confirm password' : null;
-
+                              //return value!.isEmpty ? 'please confirm password' : null;
+                              if(value!.isEmpty)
+                              {
+                                return 'Please  Re-enter a Password';
+                              }
+                              if(_password!= _confirmPassword)
+                              {
+                                return 'Passwords do not match!!';
+                              }
                             }
                         ),
                       ),
                       SizedBox(height: 40,),
-                      // MaterialButton(
-                      //   minWidth: double.infinity,
-                      //   onPressed: () {},
-                      //   child: Text('Login'),
-                      //   color: Colors.deepOrange,
-                      //   textColor: Colors.white,
-                      //
-                      //
-                      //  ),
                       Material(
                         color: Colors.deepOrange,
 
@@ -230,12 +295,20 @@ class _MyAppState extends State<Register> {
                         child: InkWell(
 
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                                )
-                            );
+
+                            if(_formkey.currentState!.validate())
+                              {
+                                showRegistertoLoginDialog(context);
+                                return;
+                              }
+                                else{
+
+
+                                  return null;
+                              }
+
+
+
                           },
                           borderRadius: BorderRadius.circular(50),
 
@@ -250,29 +323,7 @@ class _MyAppState extends State<Register> {
                         ),
 
                       ),
-                      SizedBox(height: 10.0,),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10.0),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     children: [
-                      //       Text('Forgot password?',style: TextStyle(color: Colors.deepOrange,fontSize: 16.0,fontWeight: FontWeight.bold),),
-                      //     ],
-                      //   ),
-                      // ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.all(30.0),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //     children: [
-                      //       Tab(icon: Icon(MyFlutterApp.facebook,color: Colors.indigo,size: 40,),),
-                      //       Tab(icon: Icon(MyFlutterApp.instagram,color: Colors.pink,size: 40,),),
-                      //       Tab(icon: Icon(MyFlutterApp.google,color: Colors.redAccent,size: 40,),),
-                      //     ],
-                      //   ),
-                      // ),
-                      SizedBox(height: 60.0,),
+                      SizedBox(height: 50.0,),
                       GestureDetector(
                         onTap: (){
                           Navigator.push(
@@ -302,6 +353,7 @@ class _MyAppState extends State<Register> {
                     ],
                   ),
                   )
+              ),
               ),
             ],
 
