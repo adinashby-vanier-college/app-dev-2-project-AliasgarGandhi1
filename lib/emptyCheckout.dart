@@ -80,17 +80,17 @@ class _CheckoutState extends State<emptyCheckout> {
               height:  200,//MediaQuery.of(context).size.height * 0.4,
 
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage('Images/emptycart.png'),//Image.asset('Images/sneakers.png'),//AssetImage('https://www.bing.com/images/search?view=detailV2&ccid=rEpE6Udv&id=4B945ED6CA57E859480BCB084FFA509420F47882&thid=OIP.rEpE6Udvde8aFOiS-hYo6QHaGw&mediaurl=https%3a%2f%2fthumbs.dreamstime.com%2fz%2fshopping-cart-sad-5662438.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.ac4a44e9476f75ef1a14e892fa1628e9%3frik%3dgnj0IJRQ%252bk8Iyw%26pid%3dImgRaw%26r%3d0&exph=1187&expw=1300&q=empty+cart+sad+face+&simid=607998736345797767&FORM=IRPRST&ck=15BAEC0EDB9462FAD714C22FFA13CB73&selectedIndex=2'),
-                )
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage('Images/emptycart.png'),//Image.asset('Images/sneakers.png'),//AssetImage('https://www.bing.com/images/search?view=detailV2&ccid=rEpE6Udv&id=4B945ED6CA57E859480BCB084FFA509420F47882&thid=OIP.rEpE6Udvde8aFOiS-hYo6QHaGw&mediaurl=https%3a%2f%2fthumbs.dreamstime.com%2fz%2fshopping-cart-sad-5662438.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.ac4a44e9476f75ef1a14e892fa1628e9%3frik%3dgnj0IJRQ%252bk8Iyw%26pid%3dImgRaw%26r%3d0&exph=1187&expw=1300&q=empty+cart+sad+face+&simid=607998736345797767&FORM=IRPRST&ck=15BAEC0EDB9462FAD714C22FFA13CB73&selectedIndex=2'),
+                  )
               ),
             ),
             Text(
               'Oops!! Your cart is empty',
               style:  TextStyle(
-                color: Colors.black,fontSize: 30,
-                fontWeight: FontWeight.w800
+                  color: Colors.black,fontSize: 30,
+                  fontWeight: FontWeight.w800
               ),textAlign: TextAlign.center,
             ),
             SizedBox(height: 50,),
