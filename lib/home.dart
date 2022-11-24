@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/account_info.dart';
+import 'package:mtl_chassures/login.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/search.dart';
@@ -275,19 +277,25 @@ class _MyAppState extends State<Home> {
             ListTile(
               title: const Text('LogIn'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => LoginScreen(),
+    ),
+
+    );
+    },
+
             ),
             ListTile(
               title: const Text('Sign Up'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Register(),
+                    )
+                );
               },
             ),
           ],

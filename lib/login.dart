@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mtl_chassures/Register.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,57 +9,6 @@ import 'package:flutter/widgets.dart';
 //   runApp( const LoginScreen());
 // }
 
-class CustomWidgets {
-
-    static Widget socialButtonRect(title, color, icon, {Function? onTap}) {
-    return InkWell(
-      onTap: () {
-        onTap!();
-      },
-      child: Container(
-        height: 50,
-        margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              icon,
-              color: Colors.white,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Text(title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  static Widget socialButtonCircle(color, icon, {iconColor, Function? onTap}) {
-    return InkWell(
-      onTap: () {
-        onTap!();
-      },
-      child: Container(
-          padding: const EdgeInsets.all(20.0),
-          decoration: new BoxDecoration(
-            shape: BoxShape.circle,
-            color: color,
-          ),
-          child: Icon(
-            icon,
-            color: iconColor,
-          )), //
-    );
-  }
-}
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -72,14 +22,7 @@ class _MyAppState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
        home: Scaffold(
-      //   appBar: AppBar(
-      //     centerTitle: true,
-      //     title: Text(
-      //       "Login"
-      //     ),
-      //
-      //     backgroundColor: Colors.deepOrange,
-      //   ),
+         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
 
         body: Column(
@@ -209,6 +152,12 @@ class _MyAppState extends State<LoginScreen> {
                 SizedBox(height: 60.0,),
                 GestureDetector(
                   onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => Register(),
+                    ),
+                    );
                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>Second()));
                   },
                   child: Text.rich(

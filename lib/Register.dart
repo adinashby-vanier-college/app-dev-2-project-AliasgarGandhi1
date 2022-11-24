@@ -1,73 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mtl_chassures/login.dart';
 import 'my_flutter_app_icons.dart';
 
 
 void main() {
-  runApp( const LoginScreen());
+  runApp( const Register());
 }
 
-class CustomWidgets {
-
-
-  static Widget socialButtonRect(title, color, icon, {Function? onTap}) {
-    return InkWell(
-      onTap: () {
-        onTap!();
-      },
-      child: Container(
-        height: 50,
-        margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              icon,
-              color: Colors.white,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Text(title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  static Widget socialButtonCircle(color, icon, {iconColor, Function? onTap}) {
-    return InkWell(
-      onTap: () {
-        onTap!();
-      },
-      child: Container(
-          padding: const EdgeInsets.all(20.0),
-          decoration: new BoxDecoration(
-            shape: BoxShape.circle,
-            color: color,
-          ),
-          child: Icon(
-            icon,
-            color: iconColor,
-          )), //
-    );
-  }
-}
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _MyAppState();
+  State<Register> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<LoginScreen> {
+class _MyAppState extends State<Register> {
   bool _obscureTextcreate=true;
   bool _obscureTextconfirm=true;
   @override
@@ -280,7 +229,14 @@ class _MyAppState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(50),
                         child: InkWell(
 
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                                )
+                            );
+                          },
                           borderRadius: BorderRadius.circular(50),
 
                           child: Container(
@@ -319,6 +275,12 @@ class _MyAppState extends State<LoginScreen> {
                       SizedBox(height: 60.0,),
                       GestureDetector(
                         onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          );
                           // Navigator.push(context, MaterialPageRoute(builder: (context)=>Second()));
                         },
                         child: Text.rich(

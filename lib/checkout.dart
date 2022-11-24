@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/login.dart';
+import 'package:mtl_chassures/wishlist.dart';
 import 'dialog.dart';
 import 'home.dart';
 import 'my_flutter_app_icons.dart';
@@ -95,7 +96,14 @@ class _CheckoutState extends State<Checkout> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Wishlist(),
+                                  )
+                              );
+                            },
                             icon: Icon(MyFlutterApp.arrow_left)),
                         // Image.network(
                         //     'https://img.icons8.com/ios-filled/344/squared-menu.png'),
