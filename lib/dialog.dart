@@ -33,9 +33,9 @@ showAlertDialog(BuildContext context) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    contentTextStyle: TextStyle(color: Colors.black),
-    titleTextStyle:TextStyle(color: Colors.black,fontSize:18,fontWeight: FontWeight.bold) ,
-    backgroundColor: Colors.white,
+    contentTextStyle: TextStyle(color: Colors.white),
+    titleTextStyle:TextStyle(color: Colors.white,fontSize:18,fontWeight: FontWeight.bold) ,
+    backgroundColor: Colors.red,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(15),
     ),
