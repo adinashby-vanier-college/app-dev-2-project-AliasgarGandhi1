@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/home.dart';
 // import 'package:mtl_chassures/home.dart';
-import 'package:mtl_chassures/main.dart';
+import 'package:mtl_chassures/login.dart';
 
  void main() {
    runApp( SplashScreen());

@@ -7,7 +7,7 @@ import 'package:mtl_chassures/appBar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mtl_chassures/wishlist.dart';
 
-// void main() => runApp(Home());
+//void main() => runApp(Home());
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -406,6 +406,14 @@ class _MyAppState extends State<Home> {
         context,
         MaterialPageRoute(
           builder: (context) => Account_info(),
+        ),
+      );
+    }
+    if (_selectedIndex == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Wishlist(),
         ),
       );
     }
