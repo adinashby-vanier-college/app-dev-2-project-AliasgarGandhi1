@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mtl_chassures/appBar.dart';
+
+import 'home.dart';
 
 var firstName;
 bool edit = false;
@@ -48,9 +49,11 @@ class _Account_info extends State<Account_info> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: 40,
-                    width: 40,
+                  IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                   Text(
                     'Account',
@@ -61,8 +64,10 @@ class _Account_info extends State<Account_info> {
                         fontSize: 19.0),
                   ),
                   IconButton(
-                    icon: Icon(Icons.favorite_border, color: Colors.black),
-                    onPressed: () {},
+                    icon: Icon(Icons.home, color: Colors.black),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                    },
                   ),
                 ],
               ),

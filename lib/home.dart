@@ -20,10 +20,13 @@ class Home extends StatefulWidget {
 // This widget is the root of your application.
 class _MyAppState extends State<Home> {
   bool _heart_filled = true;
-
+  // int _selectedIndex = 0;
   Query dbRef = FirebaseDatabase.instance.ref().child('Products');
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child('Products');
+
+  @override
+
 
   Widget listItem({required Map product}) {
     // Padding cards() {
@@ -170,8 +173,11 @@ class _MyAppState extends State<Home> {
     );
   }
 
-  // final scaffoldKey = GlobalKey<ScaffoldState>();
-  // bool showBorder = false;
+  // @override
+  // void activate() {
+  //   _selectedIndex =0;
+  //   super.activate();
+  // }
 
   Container offers(String title) {
     return Container(
@@ -426,15 +432,7 @@ class _MyAppState extends State<Home> {
       ),
     ));
   }
-
   int _selectedIndex = 0;
-
-  // static const List<Navigator> _widgetOptions = <Navigator>[
-  //   Navigator(
-  //     pages: [Search()],
-  //   )
-  // ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
