@@ -142,8 +142,6 @@ padding: EdgeInsets.only(left: 15,right: 15),
 
                                       ),
 
-
-
                                       Spacer(),
 
                                       Text("\$120.00",style: TextStyle(fontWeight: FontWeight.bold,
@@ -178,14 +176,8 @@ padding: EdgeInsets.only(left: 15,right: 15),
                                         fontSize: 13,
                                       ),
                                       ),
-
                                       ),
-
-
-
                                       Spacer(),
-
-
                                     ],
                                   ),
                                   SizedBox(height: 8,),

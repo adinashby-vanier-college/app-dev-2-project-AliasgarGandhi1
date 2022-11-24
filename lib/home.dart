@@ -57,8 +57,8 @@ class _MyAppState extends State<Home> {
           children: [
             Container(
               padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-              child: Image.asset(
-                'Images/' + product['img'],
+              child: Image.network(
+                product['img'],
                 //Shoes['image']
                 width: 120,
                 height: 100,
