@@ -6,7 +6,8 @@ import 'package:mtl_chassures/splash_screen.dart';
 
 
 void main() async{
-
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
