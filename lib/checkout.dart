@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/login.dart';
+import 'dialog.dart';
 import 'home.dart';
 import 'my_flutter_app_icons.dart';
 
@@ -466,7 +467,7 @@ class _CheckoutState extends State<Checkout> {
                     child: InkWell(
 
                       onTap: () {
-                        //showOrderPlacedDialog1(context);
+                        showOrderPlacedDialog1(context);
                       },
                       borderRadius: BorderRadius.circular(50),
 
@@ -494,7 +495,7 @@ class _CheckoutState extends State<Checkout> {
 
                       onTap: () {
 
-                       // showAlertDialog(context);
+                       showAlertDialog(context);
 
                       },
                       borderRadius: BorderRadius.circular(50),
