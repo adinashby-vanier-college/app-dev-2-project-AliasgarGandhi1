@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'home.dart';
 
-var firstName;
 bool edit = false;
-TextField txt = new TextField();
+TextEditingController txtFullName = new TextEditingController();
+TextEditingController txtEmailID = new TextEditingController();
+TextEditingController txtAddress = new TextEditingController();
+TextEditingController txtPhoneNo = new TextEditingController();
 
-// void main() => runApp(Account_info());
+void main() => runApp(Account_info());
 
 class Account_info extends StatefulWidget {
   const Account_info({super.key});
@@ -16,8 +18,7 @@ class Account_info extends StatefulWidget {
 
 // This widget is the root of your application.
 class _Account_info extends State<Account_info> {
-
-  Widget Item(String lable, String? value) {
+  Widget Item(String lable, String? value, TextEditingController controller) {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsets.symmetric(vertical: 10.0),
@@ -25,11 +26,26 @@ class _Account_info extends State<Account_info> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "   "+lable,
+            "   " + lable,
             style: TextStyle(color: Colors.black54),
           ),
-          // TextField(readOnly: true),
-          txt,
+          TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              hintText: lable,
+              enabledBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                    color: Colors.black, width: 2, style: BorderStyle.solid),
+              ),
+              prefixIcon: Icon(Icons.person),
+              prefixIconColor: Colors.red,
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                      color: Colors.red, width: 2, style: BorderStyle.solid)),
+            ),
+          ),
         ],
       ),
     );
@@ -66,7 +82,8 @@ class _Account_info extends State<Account_info> {
                   IconButton(
                     icon: Icon(Icons.home, color: Colors.black),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Home()));
                     },
                   ),
                 ],
@@ -101,16 +118,16 @@ class _Account_info extends State<Account_info> {
                           decoration: TextDecoration.underline),
                     ),
                     onPressed: () {
-                       edit? edit=false : edit=true;
+                      edit ? edit = false : edit = true;
                     },
                   )
                 ],
               ),
             ),
-            Item("First Name", firstName),
+            Item("Full Name", txtFullName.text, txtFullName),
             // Item("First Name", Account['firstName']),
 
-            Item("Last Name", firstName),
+            Item("Email ID", txtEmailID.text, txtEmailID),
             // Item("Last Name", Account['lastName']),
           ],
         )),
