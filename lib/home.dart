@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
-import 'package:mtl_chassures/insertProduct.dart';
-import 'package:mtl_chassures/main.dart';
+import 'package:mtl_chassures/login.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/order.dart';
 import 'package:mtl_chassures/search.dart';
-import 'package:mtl_chassures/appBar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mtl_chassures/wishlist.dart';
 
