@@ -8,9 +8,6 @@ import 'package:mtl_chassures/login.dart';
 import 'dialog.dart';
 import 'my_flutter_app_icons.dart';
 
-
-
-
 // void main() {
 //
 //   runApp(const Register());

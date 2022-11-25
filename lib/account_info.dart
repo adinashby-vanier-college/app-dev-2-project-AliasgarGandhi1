@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/services.dart';
+import 'package:mtl_chassures/my_flutter_app_icons.dart';
+import 'dialog.dart';
 import 'home.dart';
 
 bool edit = false;
@@ -18,6 +21,15 @@ class Account_info extends StatefulWidget {
 
 // This widget is the root of your application.
 class _Account_info extends State<Account_info> {
+  late DatabaseReference dbRef;
+
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('users');
+  }
+
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -75,145 +87,206 @@ class _Account_info extends State<Account_info> {
                 ),
               ),
               Form(
+                  key: _formkey,
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "    Full Name",
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  TextFormField(
-                    controller: txtFullName,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Full Name',
-                      enabledBorder: UnderlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2,
-                            style: BorderStyle.solid),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "    Full Name",
+                        style: TextStyle(color: Colors.black54),
                       ),
-                      prefixIcon: Icon(Icons.person),
-                      prefixIconColor: Colors.red,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                              style: BorderStyle.solid)),
-                    ),
-                  ),
+                      TextFormField(
+                          controller: txtFullName,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Full Name',
+                            enabledBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 2,
+                                  style: BorderStyle.solid),
+                            ),
+                            prefixIcon: Icon(MyFlutterApp.address_book),
+                            prefixIconColor: Colors.red,
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2,
+                                    style: BorderStyle.solid)),
+                          ),
+                          validator: (value) {
+                            return value!.isEmpty ||
+                                    !RegExp(r'^[a-z A-Z]+$').hasMatch(value)
+                                ? 'Please enter or correct name'
+                                : null;
+                          }),
 
-                  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-                  SizedBox(height: 20),
-                  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      SizedBox(height: 20),
+                      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                  Text(
-                    "    Address",
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  TextFormField(
-                    controller: txtAddress,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Address',
-                      enabledBorder: UnderlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2,
-                            style: BorderStyle.solid),
+                      Text(
+                        "    Address",
+                        style: TextStyle(color: Colors.black54),
                       ),
-                      prefixIcon: Icon(Icons.home_work),
-                      prefixIconColor: Colors.red,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                              style: BorderStyle.solid)),
-                    ),
-                  ),
+                      TextFormField(
+                          controller: txtAddress,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Address',
+                            enabledBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 2,
+                                  style: BorderStyle.solid),
+                            ),
+                            prefixIcon: Icon(MyFlutterApp.address_card),
+                            prefixIconColor: Colors.red,
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2,
+                                    style: BorderStyle.solid)),
+                          ),
+                          validator: (value) {
+                            return value!.isEmpty
+                                ? 'Please Enter Address'
+                                : null;
+                          }),
 
-                  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-                  SizedBox(height: 20),
-                  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      SizedBox(height: 20),
+                      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                  Text(
-                    "    Email ID",
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  TextFormField(
-                    controller: txtEmailID,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Email ID',
-                      enabledBorder: UnderlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2,
-                            style: BorderStyle.solid),
+                      Text(
+                        "    Email ID",
+                        style: TextStyle(color: Colors.black54),
                       ),
-                      prefixIcon: Icon(Icons.email),
-                      prefixIconColor: Colors.red,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                              style: BorderStyle.solid)),
-                    ),
-                  ),
+                      TextFormField(
+                          controller: txtEmailID,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Email ID',
+                            enabledBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                  color: Colors.black,
+                                  width: 2,
+                                  style: BorderStyle.solid),
+                            ),
+                            prefixIcon: Icon(MyFlutterApp.mail_bulk),
+                            prefixIconColor: Colors.red,
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2,
+                                    style: BorderStyle.solid)),
+                          ),
+                          validator: (value) {
+                            return value!.isEmpty ||
+                                    !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                        .hasMatch(value)
+                                ? 'please enter email'
+                                : null;
+                          }),
 
-                  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-                  SizedBox(height: 20),
-                  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      SizedBox(height: 20),
+                      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                  Text(
-                    "    Phone Number",
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  TextFormField(
-                    controller: txtPhoneNo,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Phone Number',
-                      enabledBorder: UnderlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2,
-                            style: BorderStyle.solid),
+                      Text(
+                        "    Phone Number",
+                        style: TextStyle(color: Colors.black54),
                       ),
-                      prefixIcon: Icon(Icons.phone),
-                      prefixIconColor: Colors.red,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                              style: BorderStyle.solid)),
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter Phone Number';
-                      }
-                      if (value.length != 10) {
-                        return 'Your phone number must have 10 digits!!';
-                      }
-                      if (!RegExp(
-                              r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
-                          .hasMatch(value)) {
-                        return 'Your phone number is invalid!!';
-                      }
-                      //
-                      return null;
-                    },
-                  ),
-                ],
-              ))
+                      TextFormField(
+                        controller: txtPhoneNo,
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          hintText: 'Enter Phone Number',
+                          enabledBorder: UnderlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 2,
+                                style: BorderStyle.solid),
+                          ),
+                          prefixIcon: Icon(MyFlutterApp.phone_alt),
+                          prefixIconColor: Colors.red,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                  color: Colors.red,
+                                  width: 2,
+                                  style: BorderStyle.solid)),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter Phone Number';
+                          }
+                          if (value.length != 10) {
+                            return 'Your phone number must have 10 digits!!';
+                          }
+                          if (!RegExp(
+                                  r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
+                              .hasMatch(value)) {
+                            return 'Your phone number is invalid!!';
+                          }
+                          //
+                          return null;
+                        },
+                      ),
+
+                      ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      SizedBox(height: 40),
+                      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 200,
+                            height: 50,
+                            child: TextButton(
+                              onPressed: () {
+                                if (_formkey.currentState!.validate()) {
+                                  Map<String, String> users = {
+                                    'name': txtFullName.text,
+                                    'email': txtEmailID.text,
+                                    'phone': txtPhoneNo.text,
+                                    'address': txtAddress.text
+                                  };
+                                  dbRef.push().update(users);
+                                  showRegistertoLoginDialog(context);
+                                  return;
+                                } else {
+                                  return null;
+                                }
+                              },
+                              child: const Text(
+                                'Update',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              style: ButtonStyle(
+                                  alignment: Alignment.center,
+                                  backgroundColor:
+                                  MaterialStatePropertyAll(Colors.red)),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ))
             ],
           ),
         )),

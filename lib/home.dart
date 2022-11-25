@@ -8,6 +8,7 @@ import 'package:mtl_chassures/order.dart';
 import 'package:mtl_chassures/search.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mtl_chassures/wishlist.dart';
+import 'package:mtl_chassures/my_flutter_app_icons.dart';
 
 // void main() => runApp(Home());
 
@@ -160,8 +161,8 @@ class _MyAppState extends State<Home> {
                       },
                       icon: Icon(
                         _heart_filled
-                            ? Icons.favorite_border_outlined
-                            : Icons.favorite,
+                            ? MyFlutterApp.heart
+                            : MyFlutterApp.heart,
                         color: Colors.deepOrange,
                       ),
                     ),
@@ -194,19 +195,6 @@ class _MyAppState extends State<Home> {
                   color: Colors.black),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0, top: 20.0),
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                'See All',
-                style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue),
-              ),
-            ),
-          )
         ],
       ),
     );
@@ -238,7 +226,7 @@ class _MyAppState extends State<Home> {
                       fontSize: 19.0),
                 ),
                 IconButton(
-                  icon: Icon(Icons.favorite_border, color: Colors.black),
+                  icon: Icon(MyFlutterApp.heart, color: Colors.black),
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Wishlist()));
@@ -368,6 +356,11 @@ class _MyAppState extends State<Home> {
                 ),
               ),
               SizedBox(
+                width: double.maxFinite,
+                height: 60,
+                child: offers("Best Seller's"),
+              ),
+              SizedBox(
                 height: 280,
                 child: Expanded(
                   child: FirebaseAnimatedList(
@@ -406,23 +399,23 @@ class _MyAppState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.red,
-        iconSize: 30,
+        iconSize: 20,
         unselectedItemColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(MyFlutterApp.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(MyFlutterApp.search),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(MyFlutterApp.address_card),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(MyFlutterApp.shopping_cart),
             label: 'Cart',
           ),
         ],
