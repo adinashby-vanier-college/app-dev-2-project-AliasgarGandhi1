@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
+import 'package:mtl_chassures/Model/user.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'dialog.dart';
 import 'home.dart';
@@ -25,6 +26,7 @@ class _Account_info extends State<Account_info> {
 
   void initState() {
     super.initState();
+    txtEmailID.text = UserData.emailId;
     dbRef = FirebaseDatabase.instance.ref().child('users');
   }
 

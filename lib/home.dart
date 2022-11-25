@@ -27,8 +27,6 @@ class _MyAppState extends State<Home> {
       FirebaseDatabase.instance.ref().child('Products');
 
   @override
-
-
   Widget listItem({required Map product}) {
     // Padding cards() {
     //   return Padding
