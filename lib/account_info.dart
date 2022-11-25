@@ -33,7 +33,7 @@ class _Account_info extends State<Account_info> {
   }
 
   void getUserData() async{
-    DataSnapshot snapshot = await dbRef.child('users/User101').get();
+    DataSnapshot snapshot = await dbRef.child('users/'+UserData.key).get();
     if(snapshot.exists)
       {
         print(snapshot.value);
