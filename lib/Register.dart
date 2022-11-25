@@ -8,6 +8,9 @@ import 'package:mtl_chassures/login.dart';
 import 'dialog.dart';
 import 'my_flutter_app_icons.dart';
 
+
+
+
 // void main() {
 //
 //   runApp(const Register());
@@ -46,14 +49,14 @@ class _MyAppState extends State<Register> {
 
   RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
   //A function that validate user entered password
-  // bool validatePassword(String pass) {
-  //   String _password = pass.trim();
-  //   if (pass_valid.hasMatch(_password)) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  bool validatePassword(String pass) {
+    String _password = pass.trim();
+    if (pass_valid.hasMatch(_password)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -78,6 +81,7 @@ class _MyAppState extends State<Register> {
                 child: SingleChildScrollView(
 
                     child :  Form(
+
                       key: _formkey,
                       child: Column(
                         children: [
@@ -233,16 +237,16 @@ class _MyAppState extends State<Register> {
                                   if(value.length>=15){
                                     return 'Your password must be only 15 characters long';
                                   }
-                                  // else{
-                                  //   //call function to check password
-                                  //  // bool result = validatePassword(value);
-                                  //  //  if(result){
-                                  //  //    // create account event
-                                  //  //    return null;
-                                  //  //  }else{
-                                  //  //    return " Password should contain Capital, small letter & Number & Special";
-                                  //  //  }
-                                  // }
+                                  else{
+                                    //call function to check password
+                                   bool result = validatePassword(value);
+                                    if(result){
+                                      // create account event
+                                      return null;
+                                    }else{
+                                      return " Password should contain Capital, small letter & Number & Special";
+                                    }
+                                  }
                                   return null;
                                 }
                             ),

@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mtl_chassures/Register.dart';
+import 'package:mtl_chassures/home.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:flutter/widgets.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 
-// void main() {
-//   runApp( const LoginScreen());
-// }
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,6 +20,18 @@ class LoginScreen extends StatefulWidget {
 
 class _MyAppState extends State<LoginScreen> {
   bool _obscureText=true;
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
+
+  Query dbRef = FirebaseDatabase.instance.ref().child('users');
+  DatabaseReference reference =
+  FirebaseDatabase.instance.ref().child('users');
+
+  final GlobalKey<FormState> _formkey1= GlobalKey<FormState>();
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +40,7 @@ class _MyAppState extends State<LoginScreen> {
         backgroundColor: Colors.white,
 
         body: Column(
+          key: _formkey1,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -43,6 +58,7 @@ class _MyAppState extends State<LoginScreen> {
               children: [
                 Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                 child : TextFormField(
+                    controller: _email,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     labelText: 'Email Address',
@@ -58,6 +74,9 @@ class _MyAppState extends State<LoginScreen> {
 
 
                   ),
+                    onSaved: (value){
+                      _email = value as TextEditingController;
+                    },
                   onChanged: (String value){
 
                   },
@@ -71,6 +90,7 @@ class _MyAppState extends State<LoginScreen> {
 
                 Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                   child : TextFormField(
+                      controller: _password,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -96,9 +116,9 @@ class _MyAppState extends State<LoginScreen> {
 
 
                       ),
-                      // onSaved: (value){
-                      //   _password =value;
-                      // },
+                       onSaved: (value){
+                         _password = value as TextEditingController;
+                       },
                       obscureText: _obscureText,
                       onChanged: (String value){
 
@@ -114,7 +134,22 @@ class _MyAppState extends State<LoginScreen> {
                   color: Colors.deepOrange,
                   borderRadius: BorderRadius.circular(50),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      //print("hello");
+                      if(_formkey1.currentState!.validate())
+                      {
+                        print("hello");
+                        FirebaseAuth.instance.signInWithEmailAndPassword(email: _email.text, password: _password.text)
+                            .then((value){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+                        });
+                        return;
+                      }
+                      else{
+
+                        return null;
+                      }
+                    },
                     borderRadius: BorderRadius.circular(50),
                     child: Container(
 
