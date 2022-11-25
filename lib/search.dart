@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/my_flutter_app_icons.dart';
+import 'package:mtl_chassures/product.dart';
 
 // void main() {
 //   runApp(Search());
@@ -30,6 +32,9 @@ class _SearchState extends State<Search> {
                 children: [
                   TextField(
                     controller: _searchController,
+                    onSubmitted: (value) {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Product()));
+                    },
                     decoration: InputDecoration(
                       hintText: 'Search',
                       enabledBorder: UnderlineInputBorder(
@@ -39,7 +44,7 @@ class _SearchState extends State<Search> {
                             width: 2,
                             style: BorderStyle.solid),
                       ),
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: Icon(MyFlutterApp.search),
                       prefixIconColor: Colors.red,
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),

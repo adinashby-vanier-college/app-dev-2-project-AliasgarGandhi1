@@ -27,7 +27,7 @@ class Wishlist extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.arrow_back, color: Colors.black),
+                        icon: Icon(MyFlutterApp.arrow_left, color: Colors.black),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -41,7 +41,7 @@ class Wishlist extends StatelessWidget {
                             fontSize: 19.0),
                       ),
                       IconButton(
-                        icon: Icon(Icons.home, color: Colors.black),
+                        icon: Icon(MyFlutterApp.home, color: Colors.black),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -67,7 +67,8 @@ class Wishlist extends StatelessWidget {
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.delete_rounded)),
+                          onPressed: () {
+                          }, icon: Icon(MyFlutterApp.trash_alt)),
                       Image.asset(
                         'Images/sneakers1.webp',
                         //Wishlist['image']
@@ -187,7 +188,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
   Widget build(BuildContext context) {
     return DropdownButton<int>(
       value: dropdownValue,
-      icon: const Icon(Icons.arrow_drop_down_circle_rounded),
+      icon: const Icon(MyFlutterApp.arrow_circle_down),
       elevation: 16,
       style: const TextStyle(color: Colors.black),
       borderRadius: BorderRadius.all(Radius.circular(10.0)),

@@ -1,30 +1,12 @@
-class User{
-  static late String _userName;
-  static late String _phoneNumber;
-  static late String _emailId;
-  static late String _address;
+class UserData{
+  static String key ="";
+  static String userName="";
+  static String phoneNumber="";
+  static String emailId="";
 
-  static String get userName => _userName;
+  static Map UserMap= new Map();
 
-  static set userName(String value) {
-    _userName = value;
-  }
+  static void getKey(){
 
-  static String get phoneNumber => _phoneNumber;
-
-  static String get address => _address;
-
-  static set address(String value) {
-    _address = value;
-  }
-
-  static String get emailId => _emailId;
-
-  static set emailId(String value) {
-    _emailId = value;
-  }
-
-  static set phoneNumber(String value) {
-    _phoneNumber = value;
   }
 }

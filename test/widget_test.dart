@@ -10,11 +10,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mtl_chassures/home.dart';
 import 'package:mtl_chassures/main.dart';
+import 'package:mtl_chassures/splash_screen.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const LoginScreen());
+    await tester.pumpWidget(const SplashScreenShow());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
