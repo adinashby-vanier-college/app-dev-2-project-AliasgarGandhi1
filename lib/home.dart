@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/login.dart';
@@ -348,6 +349,7 @@ class _MyAppState extends State<Home> {
                         Animation<double> animation, int index) {
                       Map product = snapshot.value as Map;
                       product['key'] = snapshot.key;
+                      Product.productMap = product;
                       return listItem(product: product);
                     },
                   ),

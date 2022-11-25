@@ -67,7 +67,8 @@ class Wishlist extends StatelessWidget {
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {}, icon: Icon(MyFlutterApp.trash_alt)),
+                          onPressed: () {
+                          }, icon: Icon(MyFlutterApp.trash_alt)),
                       Image.asset(
                         'Images/sneakers1.webp',
                         //Wishlist['image']

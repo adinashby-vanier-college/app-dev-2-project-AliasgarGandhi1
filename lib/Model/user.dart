@@ -1,12 +1,12 @@
 class UserData{
-  static late String key;
-  static late String userName;
-  static late String phoneNumber;
-  static late String emailId;
+  static String key ="";
+  static String userName="";
+  static String phoneNumber="";
+  static String emailId="";
 
-  static late Map UseMap;
+  static Map UserMap= new Map();
 
-  void getKey(){
+  static void getKey(){
 
   }
 }

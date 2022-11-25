@@ -23,11 +23,27 @@ class Account_info extends StatefulWidget {
 // This widget is the root of your application.
 class _Account_info extends State<Account_info> {
   late DatabaseReference dbRef;
+  UserData userData = new UserData();
 
   void initState() {
     super.initState();
     txtEmailID.text = UserData.emailId;
     dbRef = FirebaseDatabase.instance.ref().child('users');
+    getUserData();
+  }
+
+  void getUserData() async{
+    DataSnapshot snapshot = await dbRef.child('users/User101').get();
+    if(snapshot.exists)
+      {
+        print(snapshot.value);
+      }
+    else{
+      print("no data");
+    }
+    Map user = snapshot.key as Map;
+
+    UserData.UserMap = user;
   }
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -47,7 +63,7 @@ class _Account_info extends State<Account_info> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    icon: Icon(MyFlutterApp.arrow_left, color: Colors.black),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -61,7 +77,7 @@ class _Account_info extends State<Account_info> {
                         fontSize: 19.0),
                   ),
                   IconButton(
-                    icon: Icon(Icons.home, color: Colors.black),
+                    icon: Icon(MyFlutterApp.home, color: Colors.black),
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Home()));

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mtl_chassures/Model/user.dart';
 import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/home.dart';
@@ -138,11 +139,11 @@ class _MyAppState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(50),
                   child: InkWell(
                     onTap: () {
-                      //print("hello");
                       if(_formkey1.currentState!.validate())
                       {
                         FirebaseAuth.instance.signInWithEmailAndPassword(email: _email.text, password: _password.text)
                             .then((value){
+                              UserData.emailId = _email.text;
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
                         });
                         return;
@@ -151,8 +152,6 @@ class _MyAppState extends State<LoginScreen> {
                       {
                           showErrorinLogin(context);
                       }
-
-
                     },
                     borderRadius: BorderRadius.circular(50),
                     child: Container(
