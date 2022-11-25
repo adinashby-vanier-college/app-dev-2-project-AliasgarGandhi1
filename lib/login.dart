@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mtl_chassures/Register.dart';
+import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/home.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:flutter/widgets.dart';
@@ -40,7 +41,7 @@ class _MyAppState extends State<LoginScreen> {
         backgroundColor: Colors.white,
 
         body: Column(
-          key: _formkey1,
+
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -54,7 +55,9 @@ class _MyAppState extends State<LoginScreen> {
             ),
             ),
             Padding(padding: const EdgeInsets.symmetric(vertical: 30),
-          child :  Form(child: Column(
+          child :  Form(
+            key: _formkey1,
+            child: Column(
               children: [
                 Padding(padding: const EdgeInsets.symmetric(horizontal: 30),
                 child : TextFormField(
@@ -81,7 +84,7 @@ class _MyAppState extends State<LoginScreen> {
 
                   },
                   validator: (value){
-                    return value!.isEmpty ? 'please enter email' : null;
+                    return value!.isEmpty || !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value) ? 'Please enter valid email' : null;
 
                 }
                 ),
@@ -124,7 +127,7 @@ class _MyAppState extends State<LoginScreen> {
 
                       },
                       validator: (value){
-                        return value!.isEmpty ? 'please enter password' : null;
+                        return value!.isEmpty ? 'Please enter password' : null;
 
                       }
                   ),
@@ -138,17 +141,18 @@ class _MyAppState extends State<LoginScreen> {
                       //print("hello");
                       if(_formkey1.currentState!.validate())
                       {
-                        print("hello");
                         FirebaseAuth.instance.signInWithEmailAndPassword(email: _email.text, password: _password.text)
                             .then((value){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
                         });
                         return;
                       }
-                      else{
-
-                        return null;
+                      else
+                      {
+                          showErrorinLogin(context);
                       }
+
+
                     },
                     borderRadius: BorderRadius.circular(50),
                     child: Container(
