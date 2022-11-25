@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -278,15 +279,12 @@ class _MyAppState extends State<Register> {
                                       borderRadius: BorderRadius.circular(15),
                                       borderSide: BorderSide(color: Colors.deepOrangeAccent,width: 3),
                                     ),
-
-
                                   ),
                                   onSaved: (value){
                                     _confirmPassword =value as TextEditingController;
                                   },
                                   obscureText: _obscureTextconfirm,
                                   onChanged: (String value){
-
                                   },
                                   validator: (value){
                                     //return value!.isEmpty ? 'please confirm password' : null;
@@ -304,12 +302,9 @@ class _MyAppState extends State<Register> {
                             SizedBox(height: 40,),
                             Material(
                               color: Colors.deepOrange,
-
                               borderRadius: BorderRadius.circular(50),
                               child: InkWell(
-
                                 onTap: () {
-
                                   if(_formkey.currentState!.validate())
                                   {
                                     Map<String, String> users={
@@ -318,17 +313,14 @@ class _MyAppState extends State<Register> {
                                       'phone' : _phone.text,
                                       'password': _confirmPassword.text
                                     };
+                                    // FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email.text, password: _password.text).then((value) => null)
                                     dbRef.push().set(users);
                                     showRegistertoLoginDialog(context);
                                     return;
                                   }
                                   else{
-
                                     return null;
                                   }
-
-
-
                                 },
                                 borderRadius: BorderRadius.circular(50),
 

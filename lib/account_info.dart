@@ -42,7 +42,6 @@ class _Account_info extends State<Account_info> {
       print("no data");
     }
     Map user = snapshot.key as Map;
-
     UserData.UserMap = user;
   }
 

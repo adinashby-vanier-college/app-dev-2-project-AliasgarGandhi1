@@ -76,8 +76,6 @@ class _MyAppState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide(color: Colors.deepOrange,width: 3),
                       ),
-
-
                     ),
                       onSaved: (value){
                         _email = value as TextEditingController;
@@ -143,6 +141,7 @@ class _MyAppState extends State<LoginScreen> {
                         if(_formkey1.currentState!.validate())
                         {
                           FirebaseAuth.instance.signInWithEmailAndPassword(email: _email.text, password: _password.text)
+                            // FirebaseAuth.instance.signInWithCredential(credential)
                               .then((value){
                                 UserData.emailId = _email.text;
                             Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
