@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/emptyCheckout.dart';
 import 'package:mtl_chassures/login.dart';
 import 'dialog.dart';
 import 'home.dart';
@@ -95,7 +96,10 @@ class _CheckoutState extends State<Checkout> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context,
+                              );
+                            },
                             icon: Icon(MyFlutterApp.arrow_left)),
                         // Image.network(
                         //     'https://img.icons8.com/ios-filled/344/squared-menu.png'),
@@ -124,7 +128,9 @@ class _CheckoutState extends State<Checkout> {
                               );
                             }, icon:  Icon(MyFlutterApp.home)),
                       ],
-                    ))),
+                    )
+                )
+            ),
             Container(
 
               child: Column(
@@ -353,7 +359,12 @@ class _CheckoutState extends State<Checkout> {
                                                 Color.fromRGBO(
                                                     255, 0, 0, 100.0));
                                             setState(() {
-
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => (emptyCheckout()),
+                                                ),
+                                              );
                                             });
                                           },
                                           icon: Icon(MyFlutterApp.trash_alt,
