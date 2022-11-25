@@ -81,7 +81,6 @@ class _MyAppState extends State<Register> {
                 child: SingleChildScrollView(
 
                     child :  Form(
-
                       key: _formkey,
                       child: Column(
                         children: [
