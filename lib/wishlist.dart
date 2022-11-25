@@ -145,7 +145,7 @@ class Wishlist extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => Cart(),
+                                        builder: (context) => Cart(text: "",),
                                       ),
                                     );
                                   },

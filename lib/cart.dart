@@ -1,11 +1,15 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/checkout.dart';
 
-void main() {
-  runApp(Cart());
-}
+// void main() {
+//   runApp(Cart());
+//}
 
 class Cart extends StatelessWidget {
+  final String text;
+  const Cart({Key? key, required this.text}):super(key:key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +23,9 @@ class Cart extends StatelessWidget {
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
             centerTitle: true,
             leading: GestureDetector(
-              onTap: () {},
+              onTap: () => {
+              Navigator.pop(context,)
+            },
               child: Icon(Icons.arrow_back, color: Colors.black),
             ),
             actions: <Widget>[
@@ -38,31 +44,31 @@ class Cart extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: <Widget>[
-                    CartCard(),
+                    CartCard(text),
                     SizedBox(
                       height: 10,
                     ),
-                    CartCard(),
+                    CartCard(text),
                     SizedBox(
                       height: 10,
                     ),
-                    CartCard(),
+                    CartCard(text),
                     SizedBox(
                       height: 10,
                     ),
-                    CartCard(),
+                    CartCard(text),
                     SizedBox(
                       height: 10,
                     ),
-                    CartCard(),
+                    CartCard(text),
                     SizedBox(
                       height: 10,
                     ),
-                    CartCard(),
+                    CartCard(text),
                     SizedBox(
                       height: 10,
                     ),
-                    CartCard(),
+                    CartCard(text),
                   ],
                 )),
           ),
@@ -71,83 +77,95 @@ class Cart extends StatelessWidget {
     );
   }
 
-  Widget CartCard() {
+  Widget CartCard(String text) {
+    text=text.isNotEmpty?text:"Images/sneakers2.jpg,NIKE Sneakers,\$ 89.99 cad";
+    var arr = text.split(',');
+
     return Card(
-        elevation: 50,
-        shadowColor: Colors.black,
-        color: Colors.white,
-        child: SizedBox(
-            width: 350,
-            height: 150,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    child:
-                        Image.asset('Images/sneakers2.jpg', fit: BoxFit.fill),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 1)),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: 'Addidas Runner Shoes: ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black)),
-                              TextSpan(
-                                  text: '\n\$ 89.99 cad',
-                                  style: TextStyle(color: Colors.black)),
+              elevation: 50,
+              shadowColor: Colors.black,
+              color: Colors.white,
+              child: SizedBox(
+                  width: 350,
+                  height: 150,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          child:
+                          Image.asset(arr[0], fit: BoxFit.fill),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(width: 1)),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: <Widget>[
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: arr[1],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black)),
+                                    TextSpan(
+                                        text: '\n'+arr[2],
+                                        style: TextStyle(color: Colors.black)),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 20,),
+                              Row(
+                                children: <Widget>[
+
+                                  Container(
+                                      width: 90,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Color(0xffED4232),
+                                      ),
+
+                                      child: Builder(
+                                          builder: (context)=> TextButton(
+                                            child: Text('Buy Now',
+                                            style: TextStyle(color: Colors.white)),
+                                            onPressed: () =>{
+                                              Navigator.push(context,MaterialPageRoute(
+                                                builder: (context) => (Checkout()),
+                                              )),
+                                            },
+                                      ))),
+                                  SizedBox(width: 10,),
+                                  Container(
+                                    width: 90,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Color(0xffED4232),
+                                    ),
+                                    child: Builder(
+                                      builder: (context)=> TextButton(
+                                      child: Text('Remove',
+                                          style: TextStyle(color: Colors.white)),
+                                      onPressed: () => {}
+                                    ),
+                                  ),),
+                                ],
+                              )
                             ],
                           ),
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
-                          children: <Widget>[
-
-                            Container(
-                                width: 90,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xffED4232),
-                                ),
-
-                                child: TextButton(
-                                  child: Text('Add to cart',
-                                      style: TextStyle(color: Colors.white)),
-                                  onPressed: () {},
-                                )),
-                            SizedBox(width: 10,),
-                            Container(
-                              width: 90,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(0xffED4232),
-                              ),
-                              child: TextButton(
-                                child: Text('Buy now',
-                                    style: TextStyle(color: Colors.white)),
-                                onPressed: () {},
-                              ),
-                            )
-                          ],
                         )
                       ],
                     ),
-                  )
-                ],
-              ),
-            )));
+                  )));
+
+
+
   }
 }

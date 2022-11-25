@@ -100,7 +100,6 @@ class Order extends StatelessWidget {
                   ),
                 ),
               )
-
             ],
           ), //Column
         ), //Padding

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/emptyCheckout.dart';
-import 'package:mtl_chassures/login.dart';
 import 'dialog.dart';
 import 'home.dart';
 import 'my_flutter_app_icons.dart';
@@ -9,6 +8,7 @@ import 'my_flutter_app_icons.dart';
 void main() {
   runApp(Checkout());
 }
+
 int _itemCount = 1;
 double _totalItemPrice=0;
 double _itemPrice=89.90;
