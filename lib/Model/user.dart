@@ -1,7 +1,15 @@
 class User{
+  static late String _key;
   static late String _userName;
   static late String _phoneNumber;
   static late String _emailId;
+
+  static String get key => _key;
+
+  static set key(String value) {
+    _key = value;
+  }
+
   static late String _address;
 
   static String get userName => _userName;
