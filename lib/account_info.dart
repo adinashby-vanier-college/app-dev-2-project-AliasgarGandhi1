@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
@@ -29,20 +30,24 @@ class _Account_info extends State<Account_info> {
     super.initState();
     txtEmailID.text = UserData.emailId;
     dbRef = FirebaseDatabase.instance.ref().child('users');
+    // DatabaseReference userRef = dbRef.child()
     getUserData();
   }
 
   void getUserData() async{
-    DataSnapshot snapshot = await dbRef.child('users/'+UserData.key).get();
+    DataSnapshot snapshot = (await dbRef.child('/'+UserData.key).get());
     if(snapshot.exists)
       {
-        print(snapshot.value);
+        Map user = snapshot.value as Map;
+        Map<String,String> user1 =  new Map<String, String>.from(user[user.keys.first]);
+        print(user1['phone']);
+        txtFullName.text = user1['name']!;
+        txtPhoneNo.text=user1['phone']!;
+        txtEmailID.text=user1['email']!;
       }
     else{
       print("no data");
     }
-    Map user = snapshot.key as Map;
-    UserData.UserMap = user;
   }
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();

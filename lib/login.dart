@@ -7,11 +7,7 @@ import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/home.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:flutter/widgets.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_database/firebase_database.dart';
-
-
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -144,9 +140,10 @@ class _MyAppState extends State<LoginScreen> {
                           //   final userCredentials = await FirebaseAuth.instance.signInWithCredential(credential)
                               .then((value){
                                 UserData.emailId = _email.text;
-                                if(User != null){
+                                // if(User != null){
                                   UserData.key = FirebaseAuth.instance.currentUser!.uid;
-                                }
+                                  print(UserData.key);
+                                // }
                             Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
                           });
                           return;

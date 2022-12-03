@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
+import 'package:mtl_chassures/cart.dart';
 import 'package:mtl_chassures/login.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:mtl_chassures/checkout.dart';
@@ -161,7 +162,7 @@ class _MyAppState extends State<Home> {
                       icon: Icon(
                         _heart_filled
                             ? MyFlutterApp.heart
-                            : MyFlutterApp.heart,
+                            : Icons.favorite_border_outlined,
                         color: Colors.deepOrange,
                       ),
                     ),
@@ -451,6 +452,14 @@ class _MyAppState extends State<Home> {
         context,
         MaterialPageRoute(
           builder: (context) => Account_info(),
+        ),
+      );
+    }
+    if (_selectedIndex == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Cart(),
         ),
       );
     }
