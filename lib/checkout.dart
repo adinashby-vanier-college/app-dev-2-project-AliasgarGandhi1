@@ -8,6 +8,7 @@ import 'my_flutter_app_icons.dart';
 void main() {
   runApp(Checkout());
 }
+
 int _itemCount = 1;
 double _totalItemPrice=0;
 double _itemPrice=89.90;
