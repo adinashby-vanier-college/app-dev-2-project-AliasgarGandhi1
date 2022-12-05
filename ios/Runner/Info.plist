@@ -45,6 +45,19 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <!-- TODO Replace this value: -->
+                    <!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+                    <string>com.googleusercontent.apps.173646018263-hbnmrg3ecgq0n9lt88n54ufp2duv66gd.apps.googleusercontent.com</string>
+                </array>
+            </dict>
+     </array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>

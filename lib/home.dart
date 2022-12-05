@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/LoginPage.dart';
 import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
@@ -15,6 +16,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:mtl_chassures/wishlist.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'auth_service.dart';
 
 // void main() => runApp(Home());
 
@@ -341,6 +344,16 @@ class _MyAppState extends State<Home> {
                 });
               },
             ),
+            ListTile(
+              title: const Text('LogOut'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                AuthService().signOut();
+
+              },
+            )
           ],
         ),
       ),
@@ -467,6 +480,7 @@ class _MyAppState extends State<Home> {
           builder: (context) => Account_info(),
         ),
       );
+
     }
     if (_selectedIndex == 3) {
       Navigator.push(
