@@ -1,16 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/cart.dart';
+import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/login.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/order.dart';
 import 'package:mtl_chassures/search.dart';
+import 'package:mtl_chassures/Model/user.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mtl_chassures/wishlist.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // void main() => runApp(Home());
 
@@ -27,6 +31,17 @@ class _MyAppState extends State<Home> {
   Query dbRef = FirebaseDatabase.instance.ref().child('Products');
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child('Products');
+  String loginText="";
+
+
+  @override
+  void initState() {
+    // UserData.login ? loginText="Log Out" : loginText = "Log In";
+
+    setState(() {
+      UserData.login ? loginText="Log Out" : loginText = "Log In";
+    });
+  }
 
   @override
   Widget listItem({required Map product}) {
@@ -266,7 +281,7 @@ class _MyAppState extends State<Home> {
                             );
                           },
                           child: Text(
-                            "XYZ",
+                            UserData.userName,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           )),
                     ),
@@ -301,31 +316,29 @@ class _MyAppState extends State<Home> {
               },
             ),
             ListTile(
-              title: const Text('LogIn'),
+
+              title: Text(loginText),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Sign Up'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Register(),
-                  ),
-                );
+                if(loginText == "Log In")
+                {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+
+                }
+                if(FirebaseAuth.instance.currentUser != null){
+                  FirebaseAuth.instance.signOut().then((value) {
+                    UserData.key = "";
+                    showLogoutSuccessful(context);
+                  });
+                }
+                UserData.login=!UserData.login;
+                setState(() {
+                  UserData.login ? loginText="Log Out" : loginText = "Log In";
+                });
               },
             ),
           ],
@@ -459,7 +472,7 @@ class _MyAppState extends State<Home> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Cart(),
+          builder: (context) => Cart(text: "PUMA"),
         ),
       );
     }

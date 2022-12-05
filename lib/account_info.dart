@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
@@ -28,15 +29,19 @@ class _Account_info extends State<Account_info> {
 
   void initState() {
     super.initState();
-    txtEmailID.text = UserData.emailId;
-    dbRef = FirebaseDatabase.instance.ref().child('users');
-    // DatabaseReference userRef = dbRef.child()
-    getUserData();
+    // if(UserData.login){
+      txtEmailID.text = UserData.emailId;
+      dbRef = FirebaseDatabase.instance.ref().child('users');
+      // DatabaseReference userRef = dbRef.child()
+      getUserData();
+    // }
   }
 
   void getUserData() async{
-    DataSnapshot snapshot = (await dbRef.child('/'+UserData.key).get());
-    if(snapshot.exists)
+    if(FirebaseAuth.instance.currentUser != null)
+    {
+      DataSnapshot snapshot = (await dbRef.child('/'+UserData.key).get());
+      if(snapshot.exists)
       {
         Map user = snapshot.value as Map;
         Map<String,String> user1 =  new Map<String, String>.from(user[user.keys.first]);
@@ -45,8 +50,9 @@ class _Account_info extends State<Account_info> {
         txtPhoneNo.text=user1['phone']!;
         txtEmailID.text=user1['email']!;
       }
-    else{
-      print("no data");
+      else{
+        print("no data");
+      }
     }
   }
 

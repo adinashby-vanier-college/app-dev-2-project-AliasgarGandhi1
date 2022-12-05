@@ -178,3 +178,81 @@ showErrorinLogin(BuildContext context) {
     },
   );
 }
+
+showLogoutSuccessful(BuildContext context) {
+
+  Widget continueButton = TextButton(
+    child: Text("OK"),
+    onPressed:  () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ),
+      );
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    contentTextStyle: TextStyle(color: Colors.white),
+    titleTextStyle:TextStyle(color: Colors.white,fontSize:18,fontWeight: FontWeight.bold) ,
+    backgroundColor: Colors.red,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+    title: Text("Logged Out Successfully"),
+    content: Text("Thank you very much for using our Application :)."
+    ),
+    actions: [
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showLoginRequiered(BuildContext context) {
+
+  Widget continueButton = TextButton(
+    child: Text("Ok"),
+    onPressed:  () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    contentTextStyle: TextStyle(color: Colors.white),
+    titleTextStyle:TextStyle(color: Colors.white,fontSize:18,fontWeight: FontWeight.bold) ,
+    backgroundColor: Colors.red,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+    title: Text("Oops!!"),
+    content: Text("No user has Logged in!!!"),
+    actions: [
+      //cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}

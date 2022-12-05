@@ -1,5 +1,6 @@
 class UserData{
-  static String key ="wTvVh2NgqddppWw9Y7GtmsI9SUm1";
+  static String key ="";
+  static bool login = false;
   static String userName="";
   static String phoneNumber="";
   static String emailId="";
