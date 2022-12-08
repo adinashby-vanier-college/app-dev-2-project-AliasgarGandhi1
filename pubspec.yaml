@@ -84,6 +84,7 @@ flutter:
     - Images/sneakers.png
     - Images/running-shoes.png
     - Images/emptycart.png
+    - Images/D.png
 
 
   fonts:

@@ -6,6 +6,7 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
+import 'package:mtl_chassures/orderConfirm.dart';
 
 
 class SearchPlacesScreen extends StatefulWidget {
@@ -122,7 +123,7 @@ backgroundColor: Colors.white,
 
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                  return const Checkout();
+                  return const orderConfirm();
                 }));
               },
               borderRadius: BorderRadius.circular(50),
