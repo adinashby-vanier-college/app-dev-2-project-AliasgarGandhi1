@@ -35,29 +35,28 @@ class InitState extends State<SplashScreenShow> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-         home: AuthService().handleAuthState(),
-
-        //Scaffold(
-    //   body: Stack(
-    //     children: [
-    //       Container(
-    //         decoration: BoxDecoration(
-    //           color: Colors.deepOrange,
-    //           gradient: LinearGradient(
-    //             colors: [(new Color(0xffF5591F)), (new Color( 0xffF2861E))],
-    //   begin: Alignment.topCenter,
-    //   end: Alignment.bottomCenter
-    //           )
-    //         ),
-    //       ),
-    // Center(child: Container(
-    // child: Image.asset("Images/running-shoes.png"),
-    //   height: 200,
-    //   width: 200,
-    // ),)
-    //     ],
-    //   )
-    // )
+         home:
+        Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.deepOrange,
+              gradient: LinearGradient(
+                colors: [(new Color(0xffF5591F)), (new Color( 0xffF2861E))],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter
+              )
+            ),
+          ),
+    Center(child: Container(
+    child: Image.asset("Images/running-shoes.png"),
+      height: 200,
+      width: 200,
+    ),)
+        ],
+      )
+    )
     );
   }
 }

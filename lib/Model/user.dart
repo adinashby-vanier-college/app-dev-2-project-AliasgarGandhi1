@@ -4,6 +4,7 @@ class UserData{
   static String userName="";
   static String phoneNumber="";
   static String emailId="";
+  static String address="";
 
   static Map UserMap= new Map();
 

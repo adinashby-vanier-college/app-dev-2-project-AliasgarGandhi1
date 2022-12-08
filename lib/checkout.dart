@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/emptyCheckout.dart';
+import 'Navigation/search_place.dart';
 import 'dialog.dart';
 import 'home.dart';
 import 'my_flutter_app_icons.dart';
@@ -477,7 +478,12 @@ class _CheckoutState extends State<Checkout> {
                     child: InkWell(
 
                       onTap: () {
-                        showOrderPlacedDialog1(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => (SearchPlacesScreen()),
+                          ),
+                        );
                       },
                       borderRadius: BorderRadius.circular(50),
 
