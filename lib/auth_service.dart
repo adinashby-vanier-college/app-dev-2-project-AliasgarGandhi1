@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mtl_chassures/login.dart';
 
-import 'HomePage.dart';
-import 'LoginPage.dart';
+// import 'HomePage.dart';
+// import 'LoginPage.dart';
 import 'home.dart';
 
 
@@ -17,10 +17,8 @@ class AuthService {
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
             return Home();
-            print(snapshot.hasData);
           } else {
             return const LoginScreen();
-            print(snapshot.hasData);
           }
         });
   }

@@ -5,6 +5,7 @@ class UserData{
   static String phoneNumber="";
   static String emailId="";
   static String address="";
+  static bool addressSelected=false;
 
   static Map UserMap= new Map();
 

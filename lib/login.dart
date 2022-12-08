@@ -183,12 +183,6 @@ class _MyAppState extends State<LoginScreen> {
                         GestureDetector(
                             onTap: () {
                               AuthService().signInWithGoogle();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Home(),
-                                ),
-                              );
                             },
                             child: Tab(icon: Icon(MyFlutterApp.google,color: Colors.redAccent,size: 40,),),
                         )  ],
