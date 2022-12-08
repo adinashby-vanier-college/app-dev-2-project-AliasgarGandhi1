@@ -4,6 +4,7 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
+import 'package:mtl_chassures/Model/user.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 
@@ -46,7 +47,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
     markersList.clear();
     markersList.add(Marker(markerId: const MarkerId("0"),position: LatLng(lat, lng),infoWindow: InfoWindow(title: detail.result.name)));
     print(detail.result.formattedAddress);
-    address=detail.result.formattedAddress!;
+    UserData.address=detail.result.formattedAddress!;
     setState(() {});
 
     googleMapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat, lng), 14.0));
@@ -83,10 +84,7 @@ backgroundColor: Colors.white,
 
          SizedBox(height: 20),
           Material(
-
             color: Colors.red,
-
-
             borderRadius: BorderRadius.circular(50),
             child: InkWell(
 

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mtl_chassures/LoginPage.dart';
 import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/Register.dart';
@@ -10,14 +9,13 @@ import 'package:mtl_chassures/login.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:mtl_chassures/checkout.dart';
 import 'package:mtl_chassures/order.dart';
+import 'package:mtl_chassures/product.dart';
 import 'package:mtl_chassures/search.dart';
 import 'package:mtl_chassures/Model/user.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mtl_chassures/wishlist.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'auth_service.dart';
 
 // void main() => runApp(Home());
 
@@ -30,163 +28,154 @@ class Home extends StatefulWidget {
 // This widget is the root of your application.
 class _MyAppState extends State<Home> {
   bool _heart_filled = true;
-  // int _selectedIndex = 0;
   Query dbRef = FirebaseDatabase.instance.ref().child('Products');
   DatabaseReference reference =
       FirebaseDatabase.instance.ref().child('Products');
-  String loginText="";
-
+  String loginText = "";
 
   @override
   void initState() {
-    // UserData.login ? loginText="Log Out" : loginText = "Log In";
-
+    super.initState();
+    getProductData();
     setState(() {
-      UserData.login ? loginText="Log Out" : loginText = "Log In";
+      UserData.login ? loginText = "Log Out" : loginText = "Log In";
     });
+  }
+
+  void getProductData() async {
+    DataSnapshot snapshot = (await reference.get());
+    if (snapshot.exists) {
+      Map productMap = snapshot.value as Map;
+      ProductClass.productList = productMap.values.toList();
+    }
   }
 
   @override
   Widget listItem({required Map product}) {
-    // Padding cards() {
-    //   return Padding
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: Container(
-        width: 150,
-        height: 250,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              offset: const Offset(
-                5.0,
-                5.0,
+    return GestureDetector(
+      onTap: () {
+        ProductClass.productMap = product;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Product()));
+      },
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Container(
+          width: 150,
+          height: 250,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 10.0,
+                spreadRadius: 2.0,
               ),
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
-            ),
-          ],
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Color(0x8B57636C), width: 2),
-        ),
-        child: Column(
-          // mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-              child: Image.network(
-                product['img'],
-                //Shoes['image']
-                width: 120,
-                height: 100,
-                fit: BoxFit.contain,
+            ],
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Color(0x8B57636C), width: 2),
+          ),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                child: Image.network(
+                  product['img'],
+                  width: 120,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 8, 2),
-              child: Row(
-                // mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    // 'NIKE',
-                    product['brand'],
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-              child: Row(
-                // mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    // 'Sneakers for Men',
-                    product['category'],
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: Colors.black,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsetsDirectional.fromSTEB(5, 10, 10, 0),
-              child: Row(
-                // mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    // r'$129.99',
-                    "\$ " + product['price'],
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    r'$149.99',
-                    // shoes['price']
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: Colors.black,
-                      decoration: TextDecoration.lineThrough,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-                padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+              Container(
+                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 8, 2),
                 child: Row(
-                  // mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: TextButton(
-                        onPressed: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: context => ))
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Checkout()));
-                        },
-                        child: Text(
-                          'Buy Now',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(Colors.red),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _heart_filled
-                              ? _heart_filled = false
-                              : _heart_filled = true;
-                        });
-                      },
-                      icon: Icon(
-                        _heart_filled
-                            ? MyFlutterApp.heart
-                            : Icons.favorite_border_outlined,
-                        color: Colors.deepOrange,
+                    Text(
+                      product['brand'],
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
-                )),
-          ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                child: Row(
+                  children: [
+                    Text(
+                      product['category'],
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsetsDirectional.fromSTEB(5, 20, 20, 0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "  \$ " + product['price'],
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              Container(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                  child: Row(
+                    // mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            // Navigator.push(context, MaterialPageRoute(builder: context => ))
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Checkout()));
+                          },
+                          child: Text(
+                            'Buy Now',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.red),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _heart_filled
+                                ? _heart_filled = false
+                                : _heart_filled = true;
+                          });
+                        },
+                        icon: Icon(
+                          _heart_filled
+                              ? MyFlutterApp.heart
+                              : Icons.favorite_border_outlined,
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
+          ),
         ),
       ),
     );
@@ -319,41 +308,28 @@ class _MyAppState extends State<Home> {
               },
             ),
             ListTile(
-
               title: Text(loginText),
               onTap: () {
-                if(loginText == "Log In")
-                {
+                if (loginText == "Log In") {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => LoginScreen(),
                     ),
                   );
-
                 }
-                if(FirebaseAuth.instance.currentUser != null){
+                if (FirebaseAuth.instance.currentUser != null) {
                   FirebaseAuth.instance.signOut().then((value) {
                     UserData.key = "";
                     showLogoutSuccessful(context);
                   });
                 }
-                UserData.login=!UserData.login;
+                UserData.login = !UserData.login;
                 setState(() {
-                  UserData.login ? loginText="Log Out" : loginText = "Log In";
+                  UserData.login ? loginText = "Log Out" : loginText = "Log In";
                 });
               },
             ),
-            ListTile(
-              title: const Text('LogOut'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                AuthService().signOut();
-
-              },
-            )
           ],
         ),
       ),
@@ -376,7 +352,7 @@ class _MyAppState extends State<Home> {
                         Animation<double> animation, int index) {
                       Map product = snapshot.value as Map;
                       product['key'] = snapshot.key;
-                      Product.productMap = product;
+                      // Product.productMap = product;
                       return listItem(product: product);
                     },
                   ),
@@ -452,7 +428,9 @@ class _MyAppState extends State<Home> {
       ),
     ));
   }
+
   int _selectedIndex = 0;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -480,7 +458,6 @@ class _MyAppState extends State<Home> {
           builder: (context) => Account_info(),
         ),
       );
-
     }
     if (_selectedIndex == 3) {
       Navigator.push(
