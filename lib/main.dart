@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/splash_screen.dart';
 
+import 'EmailVerification/auth_page.dart';
+import 'EmailVerification/firebase_constants.dart';
 import 'Navigation/search_place.dart';
 import 'auth_service.dart';
 import 'package:get/get.dart';
@@ -10,18 +13,17 @@ import 'package:get/get.dart';
 //
 //
  void main() async{
-//   WidgetsFlutterBinding.ensureInitialized();
-//   Firebase.initializeApp();
+   WidgetsFlutterBinding.ensureInitialized();
+   await firebaseInitialization;
    runApp( MyApp());
  }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-    home: SplashScreenShow(),
+    home: AuthPage(),
     );
   }
 }
