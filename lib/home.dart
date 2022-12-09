@@ -1,8 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/account_info.dart';
-import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/cart.dart';
 import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/login.dart';
@@ -17,7 +15,6 @@ import 'package:mtl_chassures/wishlist.dart';
 import 'package:mtl_chassures/my_flutter_app_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// void main() => runApp(Home());
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -135,13 +132,11 @@ class _MyAppState extends State<Home> {
               Container(
                   padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
                   child: Row(
-                    // mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         child: TextButton(
                           onPressed: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: context => ))
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>

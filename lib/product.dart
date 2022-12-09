@@ -55,8 +55,6 @@ class _ProductState extends State<Product> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-
                   children: <Widget>[
                     Row(
                       children: <Widget>[
