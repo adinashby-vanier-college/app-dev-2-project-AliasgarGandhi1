@@ -315,6 +315,8 @@ class _MyAppState extends State<Home> {
                 if (FirebaseAuth.instance.currentUser != null) {
                   FirebaseAuth.instance.signOut().then((value) {
                     UserData.key = "";
+                    UserData.UserMap.clear();
+                    UserData.address ="";
                     showLogoutSuccessful(context);
                   });
                 }

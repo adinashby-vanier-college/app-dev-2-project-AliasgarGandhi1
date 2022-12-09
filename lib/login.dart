@@ -5,7 +5,6 @@ import 'package:mtl_chassures/Model/user.dart';
 import 'package:mtl_chassures/Register.dart';
 import 'package:mtl_chassures/dialog.dart';
 import 'package:mtl_chassures/home.dart';
-import 'auth_service.dart';
 import 'my_flutter_app_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -182,7 +181,8 @@ class _MyAppState extends State<LoginScreen> {
                         Tab(icon: Icon(MyFlutterApp.instagram,color: Colors.pink,size: 40,),),
                         GestureDetector(
                             onTap: () {
-                              AuthService().signInWithGoogle();
+                              // AuthService().signInWithGoogle();
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
                             },
                             child: Tab(icon: Icon(MyFlutterApp.google,color: Colors.redAccent,size: 40,),),
                         )  ],

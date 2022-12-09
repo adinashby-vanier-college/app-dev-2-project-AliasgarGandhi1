@@ -27,7 +27,7 @@ class Account_info extends StatefulWidget {
 class _Account_info extends State<Account_info> {
   late DatabaseReference dbRef;
   UserData userData = new UserData();
-
+  String currentUsr = "";
   @override
   void activate() {
     setState(() {
@@ -38,6 +38,9 @@ class _Account_info extends State<Account_info> {
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('users');
+    setState(() {
+
+    });
     getUserData();
   }
 
@@ -46,12 +49,15 @@ class _Account_info extends State<Account_info> {
       DataSnapshot snapshot = (await dbRef.child('/' + UserData.key).get());
       if (snapshot.exists) {
         Map user = snapshot.value as Map;
+        print(user.keys.toString().substring(1, user.keys.toString().length-1));
+        currentUsr = user.keys.toString().substring(1, user.keys.toString().length-1);
         Map<String, String> user1 =
             new Map<String, String>.from(user[user.keys.first]);
         txtFullName.text = user1['name']!;
         txtPhoneNo.text = user1['phone']!;
         txtEmailID.text = user1['email']!;
-        user1['address']=="" ? txtAddress.text=UserData.address : txtAddress.text = user1['address']!;
+        // user1['address']=="" ? txtAddress.text=UserData.address : txtAddress.text = user1['address']!;
+        UserData.address != "" ? txtAddress.text=UserData.address : txtAddress.text = user1['address']!;
         // txtAddress.text = UserData.address;
       } else {
         print("no data");
@@ -163,7 +169,6 @@ class _Account_info extends State<Account_info> {
 
                       TextFormField(
                           controller: txtAddress,
-                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             hintText: 'Enter Address',
                             enabledBorder: UnderlineInputBorder(
@@ -182,6 +187,7 @@ class _Account_info extends State<Account_info> {
                                     width: 2,
                                     style: BorderStyle.solid)),
                           ),
+                          readOnly: true,
                           validator: (value) {
                             return value!.isEmpty
                                 ? 'Please Enter Address'
@@ -314,7 +320,7 @@ class _Account_info extends State<Account_info> {
                                     'phone': txtPhoneNo.text,
                                     'address': txtAddress.text
                                   };
-                                  dbRef.push().update(users);
+                                  dbRef.child(UserData.key+"/"+currentUsr).update(users);
                                   showUpdateSuccessfully(context);
                                   return;
                                 } else {

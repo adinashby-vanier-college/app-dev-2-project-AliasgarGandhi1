@@ -165,7 +165,6 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(color: Colors.white))),
         components: [
-          Component(Component.country, "CA"),
           Component(Component.country, "CA")
         ]);
     displayPrediction(p!, homeScaffoldKey.currentState);

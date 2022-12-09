@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/home.dart';
+import 'package:mtl_chassures/my_flutter_app_icons.dart';
 
 void main() {
   runApp(Order());
@@ -20,14 +22,16 @@ class Order extends StatelessWidget {
             centerTitle: true,
             leading: GestureDetector(
               onTap: () {},
-              child: Icon(Icons.arrow_back, color: Colors.black),
+              child: Icon(MyFlutterApp.arrow_left, color: Colors.black),
             ),
             actions: <Widget>[
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: GestureDetector(
-                  onTap: () {},
-                  child: Icon(Icons.filter_alt, color: Colors.black),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                  },
+                  child: Icon(MyFlutterApp.home, color: Colors.black),
                 ),
               ),
             ],
