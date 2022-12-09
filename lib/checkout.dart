@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/Model/product.dart';
 import 'package:mtl_chassures/emptyCheckout.dart';
 import 'Navigation/search_place.dart';
 import 'dialog.dart';
@@ -12,7 +13,7 @@ void main() {
 
 int _itemCount = 1;
 double _totalItemPrice=0;
-double _itemPrice=89.90;
+double _itemPrice= double.parse(ProductClass.productMap['price']);
 double _estimatedTax=0;
 double _estimatedShipping=0;
 double _totalPrice=0;
@@ -31,8 +32,9 @@ String estimatedShipping()  {
 
   if (_totalItemPrice > 0 && _totalItemPrice <300) {
     Shippingfee = (_totalItemPrice * 0.05).toString();
-    _estimatedShipping = double.parse(Shippingfee);
-    Shippingfee = "\$"+ (_totalItemPrice * 0.05).toString();
+    double fees = double.parse(Shippingfee);
+    _estimatedShipping = fees.floor().toDouble();
+    Shippingfee = "\$"+ ((_totalItemPrice * 0.05).floorToDouble()).toString();
   }
   else if(_totalItemPrice > 300 && _totalItemPrice <1000){
     Shippingfee="Free";
@@ -50,8 +52,8 @@ double totalPrice()  {
 double totalItemPrice(double itemPrice)  {
   if (_itemCount > 0)
     _totalItemPrice =  itemPrice * _itemCount;
-  _totalItemPrice= double.parse(_totalItemPrice.toStringAsFixed(2));
-  return _totalItemPrice;
+    _totalItemPrice= double.parse(_totalItemPrice.toStringAsFixed(2));
+    return _totalItemPrice;
 }
 
 
@@ -76,13 +78,20 @@ class Checkout extends StatefulWidget {
 
 class _CheckoutState extends State<Checkout> {
   @override
+  void initState() {
+    setState(() {
+      _totalItemPrice = totalItemPrice(_itemPrice);
+      _totalPrice=totalPrice();
+      _estimatedTax=estimatedTax();
+      Shippingfee = estimatedShipping();
+    });
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
 
       home: Scaffold(
-        // appBar: AppBar(
-
-
         backgroundColor: Color.fromRGBO(241, 237, 236, 20.0),
         body: SafeArea(child: Column(
           children: <Widget>[
@@ -101,21 +110,16 @@ class _CheckoutState extends State<Checkout> {
                               // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                             },
                             icon: Icon(MyFlutterApp.arrow_left)),
-                        // Image.network(
-                        //     'https://img.icons8.com/ios-filled/344/squared-menu.png'),
 
                         Text(
                           "Checkout",
                           style: TextStyle(
                             fontSize: 22,
                             height: 2,
-                            //line height 200%, 1= 100%, were 0.9 = 90% of actual line height
                             color: Colors.black,
-                            //font color
                             letterSpacing: 2,
                             //letter spacing
                             fontWeight: FontWeight.bold,
-                            // decorationThickness: 5, //decoration 'underline' thickness
                           ),
                         ),
                         IconButton(
@@ -134,17 +138,12 @@ class _CheckoutState extends State<Checkout> {
             Container(
 
               child: Column(
-
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
-
                   Container(
                     padding: EdgeInsets.only(left: 15, right: 15),
                     height: 400.0,
-                    ////.0,
                     width: 350.0,
-                    // color: Colors.white,
                     decoration: BoxDecoration(
                       border: Border.all(width: 2, color: Colors.black12),
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -155,15 +154,13 @@ class _CheckoutState extends State<Checkout> {
                       children: [
                         SizedBox(height: 16,),
                         Row(
-
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(
-
                               width: 90.0,
                               height: 100.0,
                               decoration: BoxDecoration(
-                                color: Colors.grey[400],
+                                color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(20),),
                               child: Center(
 
@@ -177,7 +174,7 @@ class _CheckoutState extends State<Checkout> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
 
-                                  child: Image.asset('Images/sneakers.png'),
+                                  child: Image.network(ProductClass.productMap['img']),
                                 ),
                               ),
 
@@ -195,7 +192,7 @@ class _CheckoutState extends State<Checkout> {
                                     children: [
                                       Container(width: 100.0,
                                         child: Text(
-                                          "Nike Air Max", style: TextStyle(
+                                          ProductClass.productMap['brand'], style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                         ),
@@ -206,7 +203,7 @@ class _CheckoutState extends State<Checkout> {
 
                                       Spacer(),
 
-                                      Text("\$89.90", style: TextStyle(
+                                      Text("\$ "+ProductClass.productMap['price'], style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                       ),
@@ -218,7 +215,7 @@ class _CheckoutState extends State<Checkout> {
                                     children: [
                                       Container(width: 100.0,
                                         child: Text(
-                                          "Cross Training Weightlifting Shoe",
+                                          ProductClass.productMap['category'],
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 12,
@@ -238,7 +235,7 @@ class _CheckoutState extends State<Checkout> {
                                     children: [
                                       Container(width: 100.0,
                                         child: Text(
-                                          "Size: M 8.5/W 10",
+                                          "Size: M "+ProductClass.productMap['size'],
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 13,
@@ -541,5 +538,4 @@ class _CheckoutState extends State<Checkout> {
 
     );
   }
-
 }

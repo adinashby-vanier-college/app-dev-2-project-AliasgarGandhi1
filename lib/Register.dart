@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -252,7 +251,6 @@ class _MyAppState extends State<Register> {
                                 return " Password should contain Capital, small letter & Number & Special";
                               }
                             }
-                            return null;
                           }),
                     ),
                     SizedBox(
@@ -317,7 +315,7 @@ class _MyAppState extends State<Register> {
                               'name': _name.text,
                               'email': _email.text,
                               'phone': _phone.text,
-                              'password': _confirmPassword.text
+                              'address': "",
                             };
                             // FirebaseAuth.instance
                             //     .createUserWithEmailAndPassword(

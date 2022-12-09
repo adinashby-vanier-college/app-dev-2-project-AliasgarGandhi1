@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtl_chassures/account_info.dart';
 import 'package:mtl_chassures/login.dart';
 
 import 'checkout.dart';
@@ -203,6 +204,45 @@ showLogoutSuccessful(BuildContext context) {
     ),
     title: Text("Logged Out Successfully"),
     content: Text("Thank you very much for using our Application :)."
+    ),
+    actions: [
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showUpdateSuccessfully(BuildContext context) {
+
+  Widget continueButton = TextButton(
+    child: Text("OK"),
+    onPressed:  () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Account_info(),
+        ),
+      );
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    contentTextStyle: TextStyle(color: Colors.white),
+    titleTextStyle:TextStyle(color: Colors.white,fontSize:18,fontWeight: FontWeight.bold) ,
+    backgroundColor: Colors.red,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    ),
+    title: Text("Updated"),
+    content: Text("Record Updated Successfully :)."
     ),
     actions: [
       continueButton,
