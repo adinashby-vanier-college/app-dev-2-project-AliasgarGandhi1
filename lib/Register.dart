@@ -194,9 +194,26 @@ class _MyAppState extends State<Register> {
                             return null;
                           }),
                     ),
-                    SizedBox(
-                      height: 20,
+                    Container(
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: 25),
+                      child: TextButton(
+                        onPressed: () {
+                          UserData.addressSelected = true;
+                          // Navigator.of(context).pushReplacement(
+                          //     MaterialPageRoute(
+                          //         builder: (BuildContext context) =>
+                          //             SearchPlacesScreen()));
+                        },
+                        child: Text(
+                          'Verify Phone',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
                     ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(

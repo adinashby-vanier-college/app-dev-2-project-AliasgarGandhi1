@@ -6,8 +6,9 @@ class UserData{
   static String emailId="";
   static String address="";
   static bool addressSelected=false;
+  static bool googleUser = false;
 
-  static Map UserMap= new Map();
+  static Map UserMap= {};
 
   static void setUserInfo(){
     Map users = UserData.UserMap.values as Map;

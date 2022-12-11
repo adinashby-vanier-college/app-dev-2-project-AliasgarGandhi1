@@ -29,18 +29,18 @@ class AuthService {
     final GoogleSignInAccount? googleUser1 = await GoogleSignIn(
         scopes: <String>["email"]).signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth1 = await googleUser1!
-        .authentication;
-
-    // Create a new credential
-    final credential1 = GoogleAuthProvider.credential(
-      accessToken: googleAuth1.accessToken,
-      idToken: googleAuth1.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential1);
+    // // Obtain the auth details from the request
+    // final GoogleSignInAuthentication googleAuth1 = await googleUser1!
+    //     .authentication;
+    //
+    // // Create a new credential
+    // final credential1 = GoogleAuthProvider.credential(
+    //   accessToken: googleAuth1.accessToken,
+    //   idToken: googleAuth1.idToken,
+    // );
+    //
+    // // Once signed in, return the UserCredential
+    // return await FirebaseAuth.instance.signInWithCredential(credential1);
   }
 
 //Sign out

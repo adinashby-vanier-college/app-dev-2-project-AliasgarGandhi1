@@ -38,9 +38,14 @@ class _Account_info extends State<Account_info> {
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('users');
-    setState(() {
-
-    });
+    if(UserData.key == ""){
+      setState(() {
+        txtAddress.text = "";
+        txtEmailID.text = "";
+        txtPhoneNo.text = "";
+        txtFullName.text = "";
+      });
+    }
     getUserData();
   }
 
@@ -62,6 +67,12 @@ class _Account_info extends State<Account_info> {
       } else {
         print("no data");
       }
+    }
+    if(UserData.googleUser){
+      txtFullName.text = UserData.userName;
+      txtPhoneNo.text = UserData.phoneNumber;
+      txtEmailID.text = UserData.emailId;
+      txtAddress.text = UserData.address;
     }
   }
 

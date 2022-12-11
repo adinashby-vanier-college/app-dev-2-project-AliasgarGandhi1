@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtl_chassures/checkout.dart';
 
+import 'home.dart';
+
 // void main() {
 //   runApp(Cart());
 //}
@@ -45,30 +47,6 @@ class Cart extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     CartCard(text),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CartCard(text),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CartCard(text),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CartCard(text),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CartCard(text),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CartCard(text),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CartCard(text),
                   ],
                 )),
           ),
@@ -96,7 +74,7 @@ class Cart extends StatelessWidget {
                           height: 100,
                           width: 100,
                           child:
-                          Image.asset(arr[0], fit: BoxFit.fill),
+                          Image.network(arr[0], fit: BoxFit.fill),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 1)),
@@ -124,7 +102,7 @@ class Cart extends StatelessWidget {
                                 children: <Widget>[
 
                                   Container(
-                                      width: 90,
+                                      width: 80,
                                       height: 30,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
@@ -143,7 +121,7 @@ class Cart extends StatelessWidget {
                                       ))),
                                   SizedBox(width: 10,),
                                   Container(
-                                    width: 90,
+                                    width: 80,
                                     height: 30,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
@@ -153,7 +131,9 @@ class Cart extends StatelessWidget {
                                       builder: (context)=> TextButton(
                                       child: Text('Remove',
                                           style: TextStyle(color: Colors.white)),
-                                      onPressed: () => {}
+                                      onPressed: () => {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()))
+                                      }
                                     ),
                                   ),),
                                 ],
